@@ -83,5 +83,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias work="cd /media/sf_share"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
