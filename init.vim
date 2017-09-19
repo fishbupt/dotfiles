@@ -12,6 +12,7 @@ let g:spacevim_max_column     = 120
 " let g:spacevim_colorscheme = 'base16-gruvbox-dark-soft'
 
 let g:spacevim_enable_ycm = 1
+let g:ycm_always_populate_location_list = 1
 
 " Set plugin manager, you want to use, default is dein.vim
 " let g:spacevim_plugin_manager = 'dein'  " neobundle or dein or vim-plug
