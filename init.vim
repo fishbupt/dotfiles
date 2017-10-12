@@ -36,6 +36,7 @@ let g:spacevim_unite_leader = 'f'
 let g:spacevim_buffer_index_type = 4
 
 let g:spacevim_enable_neomake = 1
+let g:spacevim_warning_symbol = '➤'
 
 if g:spacevim_enable_neomake
   " When writing a buffer.
