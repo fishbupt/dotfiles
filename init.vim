@@ -9,7 +9,7 @@ let g:spacevim_max_column     = 120
 " let g:spacevim_plugin_bundle_dir = '~/.cache/vimfiles'
 
 " set SpaceVim colorscheme
-" let g:spacevim_colorscheme = 'base16-gruvbox-dark-soft'
+let g:spacevim_colorscheme = 'base16-gruvbox-dark-soft'
 
 let g:spacevim_enable_ycm = 1
 let g:ycm_always_populate_location_list = 1
@@ -98,7 +98,13 @@ let g:spacevim_custom_plugins = [
    \ ['tomtom/tcomment_vim'],
    \ ['bronson/vim-visual-star-search'],
    \ ['dbgx/lldb.nvim'],
+   \ ['octol/vim-cpp-enhanced-highlight'],
    \ ]
+
+" cpp hightlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
 
 let g:spacevim_windows_index_type = 1
 " mapping airline
