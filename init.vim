@@ -18,7 +18,7 @@ let g:ycm_always_populate_location_list = 1
 " let g:spacevim_plugin_manager = 'dein'  " neobundle or dein or vim-plug
 
 " use space as `<Leader>`
-let mapleader = ","
+let g:mapleader = ","
 
 " Set windows shortcut leader [Window], default is `s`
 let g:spacevim_windows_leader = 's'
@@ -35,8 +35,20 @@ let g:spacevim_unite_leader = 'f'
 
 let g:spacevim_buffer_index_type = 4
 
-let g:spacevim_enable_neomake = 0
+let g:spacevim_enable_neomake = 1
 
+if g:spacevim_enable_neomake
+  " When writing a buffer.
+  " call  neomake#configure#automake('w')
+  " " When writing a buffer, and on normal mode changes (after 750ms)
+  " call neomake#configure#automake('nw', 750)
+  " " when reading a buffer (after 1s), and when writing
+  " call neomake#configure#automake('rw', 1000)
+
+  let g:neomake_open_list = 0
+  let g:neomake_cpp_enabled_makers = ['clangtidy']
+  let g:neomake_cpp_clangtidy_args = ['-p', getcwd(), '-extra-arg=-std=c++14']
+endif
 " By default, language specific plugins are not loaded. This can be changed
 " with the following, then the plugins for go development will be loaded.
 " call SpaceVim#layers#load('lang#go')
@@ -59,7 +71,7 @@ let g:deoplete#auto_complete_delay = 150
 let g:spacevim_enable_tabline_filetype_icon = 1
 let g:spacevim_enable_os_fileformat_icon = 1
 let g:spacevim_buffer_index_type = 1
-let g:neomake_vim_enabled_makers = ['vimlint', 'vint']
+" let g:neomake_vim_enabled_makers = ['vimlint', 'vint']
 if has('python3')
     let g:ctrlp_map = ''
     nnoremap <silent> <C-p> :Denite file_rec<CR>
