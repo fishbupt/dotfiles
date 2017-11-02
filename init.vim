@@ -35,7 +35,7 @@ let g:spacevim_unite_leader = 'f'
 
 let g:spacevim_buffer_index_type = 4
 
-let g:spacevim_enable_neomake = 1
+let g:spacevim_enable_neomake = 0
 let g:spacevim_warning_symbol = '➤'
 
 if g:spacevim_enable_neomake
@@ -46,9 +46,26 @@ if g:spacevim_enable_neomake
   " " when reading a buffer (after 1s), and when writing
   " call neomake#configure#automake('rw', 1000)
 
-  let g:neomake_open_list = 0
+  let g:neomake_open_list = 1
   let g:neomake_cpp_enabled_makers = ['clangtidy']
   let g:neomake_cpp_clangtidy_args = ['-p', getcwd(), '-extra-arg=-std=c++14']
+endif
+
+let g:spacevim_enable_ale = 1
+if g:spacevim_enable_ale
+  let g:ale_linter = {
+        \'cpp': ['clangtidy'],
+        \}
+  let g:ale_lint_on_text_changed = 'never'
+  let g:ale_lint_on_enter = 0
+  " Map key on navigate error and warning
+  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+  " show windows for errors or warnings
+  let g:ale_open_list = 0
+
+  let g:ale_cpp_clangtidy_checks=['-*', 'modernize-*', 'cppcoreguidelines-*']
 endif
 " By default, language specific plugins are not loaded. This can be changed
 " with the following, then the plugins for go development will be loaded.
@@ -56,7 +73,6 @@ endif
 
 " loaded ui layer
 call SpaceVim#layers#load('ui')
-call SpaceVim#layers#load('lang#javascript')
 call SpaceVim#layers#load('incsearch')
 call SpaceVim#layers#load('lang#javascript')
 call SpaceVim#layers#load('lang#python')
@@ -84,10 +100,10 @@ let g:clang2_placeholder_prev = ''
 let g:incsearch#auto_nohlsearch = 0
 " If there is a particular plugin you don't like, you can define this
 " variable to disable them entirely:
- let g:spacevim_disabled_plugins=[
-    \ ['indentLine'],
-    \ ['floobits-neovim'],
-    \ ]
+"  let g:spacevim_disabled_plugins=[
+"     \ ['indentLine'],
+"     \ ['floobits-neovim'],
+"     \ ]
 
 " If you want to add some custom plugins, use these options:
 let g:spacevim_custom_plugins = [
@@ -98,7 +114,6 @@ let g:spacevim_custom_plugins = [
    \ ['nickhutchinson/vim-cmake-syntax'],
    \ ['tomtom/tcomment_vim'],
    \ ['bronson/vim-visual-star-search'],
-   \ ['dbgx/lldb.nvim'],
    \ ['octol/vim-cpp-enhanced-highlight'],
    \ ]
 
@@ -137,10 +152,10 @@ map <C-f> :Files<cr>
 map <C-b> :Buffers<cr>
 
 nmap <C-c> :Commits<cr>
-nmap <C-h> <C-w><C-h>
-nmap <C-j> <C-w><C-j>
-nmap <C-k> <C-w><C-k>
-nmap <C-l> <C-w><C-l>
+" nmap <C-h> <C-w><C-h>
+" nmap <C-j> <C-w><C-j>
+" nmap <C-k> <C-w><C-k>
+" nmap <C-l> <C-w><C-l>
 nmap <leader>cf <plug>(fzf-maps-n)
 
 " Mapping selecting mappings
