@@ -185,7 +185,7 @@ noremap J 5j
 noremap K 5k
 
 " format code
-noremap <leader>f :Neoformat<CR>
+noremap <M-f> :Neoformat<CR>
 
 " comment
 vnoremap <c-/> :TComment<CR>
