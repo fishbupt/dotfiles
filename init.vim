@@ -21,7 +21,7 @@ let g:ycm_always_populate_location_list = 1
 let g:mapleader = ","
 
 " Set windows shortcut leader [Window], default is `s`
-let g:spacevim_windows_leader = 's'
+let g:spacevim_windows_leader = 's_'
 
 " The default file manager of SpaceVim.
 let g:spacevim_filemanager             = 'nerdtree'
@@ -31,7 +31,8 @@ let g:spacevim_filemanager             = 'nerdtree'
 let g:spacevim_enable_vimfiler_welcome = 0
 
 " Set unite work flow shortcut leader [Unite], default is `f`
-let g:spacevim_unite_leader = 'f'
+let g:spacevim_unite_leader = '-'
+let g:spacevim_denite_leader = '_'
 
 let g:spacevim_buffer_index_type = 4
 
@@ -181,8 +182,8 @@ nnoremap <F12> :Ack<CR>
 " useful keymaps
 noremap H ^
 noremap L g_
-noremap J 5j
-noremap K 5k
+noremap <Down> 5j
+noremap <Up> 5k
 
 " format code
 noremap <M-f> :Neoformat<CR>
