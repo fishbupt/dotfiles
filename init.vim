@@ -9,7 +9,7 @@ let g:spacevim_max_column     = 120
 " let g:spacevim_plugin_bundle_dir = '~/.cache/vimfiles'
 
 " set SpaceVim colorscheme
-let g:spacevim_colorscheme = 'base16-gruvbox-dark-soft'
+let g:spacevim_colorscheme = 'base16-solarized-dark' "'base16-gruvbox-dark-soft'
 
 let g:spacevim_enable_ycm = 1
 let g:ycm_always_populate_location_list = 1
@@ -34,7 +34,7 @@ let g:spacevim_enable_vimfiler_welcome = 0
 let g:spacevim_unite_leader = '-'
 let g:spacevim_denite_leader = '_'
 
-let g:spacevim_buffer_index_type = 4
+let g:spacevim_buffer_index_b200type = 4
 
 let g:spacevim_enable_neomake = 0
 let g:spacevim_warning_symbol = '➤'
@@ -74,8 +74,13 @@ endif
 
 " loaded ui layer
 call SpaceVim#layers#load('ui')
+call SpaceVim#layers#load('colorscheme')
+call SpaceVim#layers#load('fzf')
+call SpaceVim#layers#load('git')
 call SpaceVim#layers#load('incsearch')
+call SpaceVim#layers#load('lang#c')
 call SpaceVim#layers#load('lang#javascript')
+call SpaceVim#layers#load('lang#typescript')
 call SpaceVim#layers#load('lang#python')
 call SpaceVim#layers#load('lang#tmux')
 call SpaceVim#layers#load('lang#vim')
@@ -84,7 +89,7 @@ call SpaceVim#layers#load('lang#markdown')
 call SpaceVim#layers#load('shell')   
 
 let g:spacevim_enable_vimfiler_welcome = 1
-let g:spacevim_enable_debug = 1
+let g:spacevim_enable_debug = 0
 let g:deoplete#auto_complete_delay = 150
 let g:spacevim_enable_tabline_filetype_icon = 1
 let g:spacevim_enable_os_fileformat_icon = 1
@@ -177,7 +182,7 @@ smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 "
 " Ack key maps
-nnoremap <F12> :Ack<CR>
+nnoremap <F12> :Ag <C-R><C-W><CR>
 
 " useful keymaps
 noremap H ^
