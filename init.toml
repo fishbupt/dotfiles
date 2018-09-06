@@ -1,0 +1,99 @@
+#=============================================================================
+# init.toml --- My SpaceVim config
+# Author: fish <fishbupt at gmail.com>
+#=============================================================================
+
+# SpaceVim options {{{
+[options]
+    # Basic setup
+    relativenumber = false
+    default_indent = 4
+    max_column = 120
+
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_neomake = false
+    enable_guicolors = true
+    enable_vimfiler_gitstatus = true
+    enable_vimfiler_welcome = false
+    enable_vimfiler_filetypeicon = true
+
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    colorscheme = "base16-solarized-dark"
+    statusline_separator = 'arrow'
+    statusline_inactive_separator = 'arrow'
+    buffer_index_type = 4
+    enable_tabline_filetype_icon = true
+    enable_os_fileformat_icon = true
+    enable_statusline_display_mode = false
+    warning_symbol = '➤'
+    bootstrap_before = 'myspacevim#before'
+    bootstrap_after = 'myspacevim#after'
+
+    # Disable windows leader
+    windows_leader = 's_'
+
+    # Enabel YCM
+    enable_ycm = true
+#  }}}
+
+# SpaceVim layer config {{{
+[[layers]]
+    name ='core#statusline'
+    enable = true
+[[layers]]
+    name  = 'core#tabline'
+    enable = true
+[[layers]]
+    name = 'autocomplete'
+    auto-completion-return-key-behavior = "complete"
+    auto-completion-tab-key-behavior = "smart"
+[[layers]]
+    name = 'shell'
+    default_position = 'top'
+    default_height = 30
+[[layers]]
+    name = 'colorscheme'
+[[layers]]
+    name = 'VersionControl'
+[[layers]]
+    name = 'git'
+[[layers]]
+    name = 'incsearch'
+[[layers]]
+    name = 'tags'
+[[layers]]
+    name = 'fzf'
+[[layers]]
+    name = 'lang#c'
+[[layers]]
+    name = 'lang#tmux'
+[[layers]]
+    name = 'lang#toml'
+[[layers]]
+    name = 'lang#vim'
+[[layers]]
+    name = 'lang#python'
+[[layers]]
+    name = 'lang#javascript'
+[[layers]]
+    name = 'lang#typescript'
+[[layers]]
+    name = 'lang#json'
+[[layers]]
+    name = 'lang#markdown'
+# }}}
+
+# custom plugins {{{
+[[custom_plugins]]
+    name = 'chriskempson/base16-vim'
+[[custom_plugins]]
+    name = 'tomtom/tcomment_vim'
+[[custom_plugins]]
+    name = 'octol/vim-cpp-enhanced-highlight'
+[[custom_plugins]]
+    name = 'junegunn/fzf.vim'
+[[custom_plugins]]
+    name = 'tpope/vim-unimpaired'
+# }}}
