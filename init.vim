@@ -75,7 +75,6 @@ endif
 " loaded ui layer
 call SpaceVim#layers#load('ui')
 call SpaceVim#layers#load('colorscheme')
-call SpaceVim#layers#load('fzf')
 call SpaceVim#layers#load('git')
 call SpaceVim#layers#load('incsearch')
 call SpaceVim#layers#load('lang#c')
@@ -121,6 +120,7 @@ let g:spacevim_custom_plugins = [
    \ ['tomtom/tcomment_vim'],
    \ ['bronson/vim-visual-star-search'],
    \ ['octol/vim-cpp-enhanced-highlight'],
+   \ ['chriskempson/base16-vim'],
    \ ]
 
 " cpp hightlight
