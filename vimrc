@@ -137,7 +137,11 @@ set wildignorecase
 set wildmenu
 
 " Turn off default plugins. {{{
-let g:plugin_bundle_dir = '~/.vim/bundle/'
+if has('nvim')
+  let g:plugin_bundle_dir = '~/.vim/bundle/'
+else
+  let g:plugin_bundle_dir = '~/.vim/vimBundle/'
+endif
 let g:loaded_2html_plugin = 1
 let g:loaded_gzip = 1
 let g:loaded_rrhelper = 1
@@ -240,6 +244,7 @@ let s:dein_base_path = expand(g:plugin_bundle_dir)
 let s:dein_path = s:dein_base_path . 'repos/github.com/Shougo/dein.vim'
 let s:has_dein = isdirectory(s:dein_path)
 "auto install dein
+let s:first_setup = 0
 if !s:has_dein
   if s:check_cmd('git')
     call system(join([
@@ -249,6 +254,7 @@ if !s:has_dein
         \ s:dein_path
         \ ], ' '))
     let s:has_dein = 1
+    let s:first_setup = 1
   endif
 endif
 " Add the dein intallation directory into runtimepath
@@ -262,7 +268,7 @@ if s:has_dein && dein#load_state(s:dein_base_path)
   call dein#add('haya14busa/dein-command.vim')
   call dein#add('wsdjeg/dein-ui.vim')
 
-  call dein#add('chriskempson/base16-vim')
+  call dein#add('chriskempson/base16-vim', {'merged': 0})
   call dein#add('liuchengxu/eleline.vim')
   call dein#add('bagrat/vim-buffet', {'merged': 0})
   call dein#add('ryanoasis/vim-devicons')
@@ -275,11 +281,16 @@ if s:has_dein && dein#load_state(s:dein_base_path)
             \'merged': 0,
             \'build': 'yarn install --frozen-lockfile'
             \})
+  " lang#c&cpp
+  call dein#add('octol/vim-cpp-enhanced-highlight', {'merged': 0})
 
   "call dein#add('liuchengxu/vim-clap', {'build': 'call clap#helper#build_all()'})
 
   call dein#end()
   call dein#save_state()
+  if s:first_setup
+    call dein#install()
+  endif
 
   let g:buffet_powerline_separators = 1
   let g:buffet_tab_icon = "\uf00a"
@@ -370,7 +381,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -416,7 +427,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
@@ -438,6 +449,16 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Highlight jsonc comment
 autocmd FileType json syntax match comment +\/\/.\+$+
+" }}}
+
+" {{{ cpp highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+let c_no_curly_error = 1
 " }}}
 " }}}
 
