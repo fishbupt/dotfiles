@@ -9,15 +9,7 @@
 # create the symbolic links for following files
 - link:
     ~/.dotfiles: ''
-    ~/.zshrc: zshrc
     ~/.gitconifg: gitconfig
-    ~/.vimrc: vimrc
-    ~/.config/nvim/init.vim: vimrc
-    ~/.tmux.conf: tmux/tmux.conf
- 
-- shell:
-    - [git submodule update --init --recursive, Installing submodules]
-
-
+    ~/_vimrc: vimrc
       
             
