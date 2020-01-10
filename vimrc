@@ -52,7 +52,7 @@ set tabstop=4
 set ambiwidth=single " set to single if you really want to use powerline fonts
 set cmdheight=1
 set conceallevel=2
-" set cursorline
+set cursorline       " highlight current line
 set display=lastline
 set laststatus=2
 "set list
@@ -131,7 +131,7 @@ set matchpairs+=<:>
 set regexpengine=2
 set splitright
 set updatetime=500
-set virtualedit=all
+set virtualedit=block
 set whichwrap=b,s,h,l,<,>,[,]
 set wildignorecase
 set wildmenu
@@ -282,7 +282,13 @@ if s:has_dein && dein#load_state(s:dein_base_path)
             \'build': 'yarn install --frozen-lockfile'
             \})
   " lang#c&cpp
-  call dein#add('octol/vim-cpp-enhanced-highlight', {'merged': 0})
+  call dein#add('octol/vim-cpp-enhanced-highlight', {
+            \'merged': 0,
+            \'on_ft': 'cpp'
+            \})
+  call dein#add('pboettch/vim-cmake-syntax', {
+            \'on_ft': 'cmake'
+            \})
 
   "call dein#add('liuchengxu/vim-clap', {'build': 'call clap#helper#build_all()'})
 
