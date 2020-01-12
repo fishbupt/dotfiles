@@ -3,20 +3,14 @@
 " This is the personal .vimrc file of fishbupt
 
 " Basic. {{{
-function! OXS()
-  return has('macunix')
-endfunction
-
-function! LINUX()
-  return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-
-function! WINDOWS()
-  return (has('win32') || has('win64'))
-endfunction
 
 set nocompatible
-if !WINDOWS()
+
+let s:is_win = has('win32') || has('win64')
+let s:is_linux = has('unix') && !has('macunix') && !has('win32unix')
+let s:is_mac = has('macunix')
+
+if !s:is_win
   set shell=/bin/sh
 else
   set shell=cmd.exe
@@ -39,13 +33,15 @@ scriptencoding utf-8
 " }}}
 
 " Indent. {{{
-set autoindent
-set backspace=indent,eol,start " make backspace work like most other programs
+set autoindent          " Keep indentation
+set tabstop=4           " Set tab equal to 4 spaces
+set softtabstop=4       " Set soft tab equal to 4 spaces
+set shiftwidth=4        " Set auto indent spacing
+set expandtab           " Expand tab into spaces
+set smarttab            " Insert spaces in front of lines
+set backspace=indent,eol,start " Make backspace work like most other programs
 set breakindent
-set expandtab
-set shiftwidth=4
 set smartindent
-set tabstop=4
 " }}}
 
 " Appearance. {{{
@@ -54,7 +50,10 @@ set cmdheight=1
 set conceallevel=2
 set cursorline       " highlight current line
 set display=lastline
-set laststatus=2
+set laststatus=2     " display statusline
+set noshowmode       " don't display mode at statusline
+set lines=30       " make vim take fullscreen by setting lines&columns
+set columns=120
 "set list
 "set listchars=tab:>\ ,trail:\ ,extends:<,precedes:<
 set noarabicshape
@@ -65,13 +64,44 @@ set scrolloff=3
 set showcmd
 set showmatch
 set signcolumn=no
-"set statusline=%<%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}%=%l/%L,%c%V%8P
 set synmaxcol=512
+
+" }}}
+
+" Symbols define {{{
+let s:powerline_font              = 1 " Enable for powerline glyphs
+if s:powerline_font
+  let s:symbol_separator_left     = "\uE0B0"
+  let s:symbol_separator_right    = "\uE0B2"
+  let s:symbol_subseparator_left  = "\uE0B1"
+  let s:symbol_subseparator_right = "\uE0B3"
+  let s:symbol_vcs_branch         = "\uE0A0"
+else
+  let s:symbol_separator_left     = "▏"
+  let s:symbol_separator_right    = "▕"
+  let s:symbol_subseparator_left  = "│"
+  let s:symbol_subseparator_right = "│"
+  let s:symbol_vcs_branch         = "\u16B4"
+endif
+" }}}
+
+" Terminal UX {{{
+set t_Co=256 " Terminal supports 256 colors
+set t_md=    " Disable bold fonts in terminal
+
+" Enable italics
+let &t_ZH = "\e[3m"
+let &t_ZR = "\e[23m"
+
+if has('termguicolors')
+  set termguicolors " Enable 24bit colors in terminal
+endif
 " }}}
 
 " GUI. {{{
 if has('gui_running')
   let g:no_buffers_menu=1
+  set guioptions+=M "Don't load menu.vim
   set guioptions-=m "Hide menu bar.
   set guioptions-=T "Hide toolbar.
   set guioptions-=L "Hide left-hand scrollbar
@@ -268,11 +298,15 @@ if s:has_dein && dein#load_state(s:dein_base_path)
   call dein#add('haya14busa/dein-command.vim')
   call dein#add('wsdjeg/dein-ui.vim')
 
+  " ui
   call dein#add('chriskempson/base16-vim', {'merged': 0})
-  call dein#add('liuchengxu/eleline.vim')
-  call dein#add('bagrat/vim-buffet', {'merged': 0})
-  call dein#add('ryanoasis/vim-devicons')
+  " call dein#add('liuchengxu/eleline.vim')
+  " call dein#add('bagrat/vim-buffet', {'merged': 0})
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('decayofmind/vim-lightline-functions', {'merged': 0})
+  call dein#add('mengelbrecht/lightline-bufferline')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('ryanoasis/vim-devicons')
 
   call dein#add('Yggdroot/LeaderF', {
             \'build': './install.bat'
@@ -304,10 +338,73 @@ if s:has_dein && dein#load_state(s:dein_base_path)
   let g:buffet_right_trunc_icon = "\uf0a9" 
   let g:eleline_powerline_fonts=1
 endif
+
 filetype plugin indent on       " Automatically detect file types.
 syntax enable                   " Syntax highlighting
 " }}}
 
+" lightline & bufferline. {{{ 
+
+let g:lightline                   = {}
+let g:lightline.colorscheme       = 'solarized'
+let g:lightline.separator         = {'left': s:symbol_separator_left, 'right': s:symbol_separator_right}
+let g:lightline.subseparator      = {'left': s:symbol_subseparator_left, 'right': s:symbol_subseparator_right}
+let g:lightline.active            = {
+      \ 'left': [['mode', 'paste'], ['readonly', 'cwd'], ['filename'], ['gitbranch', 'modified']],
+      \ 'right': [['percent', 'lineinfo'], ['whitespace', 'fileformat', 'fileencoding'], ['filetype']],
+      \ }
+let g:lightline.inactive           = {'left': [['name']], 'right': [['percent', 'lineinfo']]}
+let g:lightline.tabline            = {'left': [['buffers']], 'right': [['tabwidth']]}
+let g:lightline.mode_map           = {
+      \ 'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'V', "\<C-v>": 'V',
+      \ 'c': 'C', 's': 'S', 'S': 'S', "\<C-s>": 'S', 't': 'T',
+      \ }
+let g:lightline.component_expand   = {'buffers': 'lightline#bufferline#buffers'} 
+let g:lightline.component_type     = {'buffers': 'tabsel'}
+let g:lightline.component        = {
+      \ 'cwd': '%{fnamemodify(getcwd(), ":~")}',
+      \ }
+let g:lightline.component_function = {
+      \   'gitbranch': 'fugitive#head',
+      \   'tabwidth': 'MyTabWidth',
+      \   'cocstatus': 'coc#status',
+      \   'fileencoding': 'lightline#functions#fileencoding',
+      \   'fileformat': 'lightline#functionsfileformat_devicons',
+      \   'filename': 'lightline#functions#filename',
+      \   'filetype': 'lightline#functions#filetype_devicons',
+      \   'gitinfo': 'lightline#functions#gitinfo_coc',
+      \   'gitblame': 'lightline#functions#gitblame_coc',
+      \   'lineinfo': 'lightline#functions#lineinfo',
+      \   'method': 'lightline#functions#method_vista',
+      \   'mode': 'lightline#functions#mode',
+      \   'readonly': 'lightline#functions#readonly',   
+      \ }
+
+function! MyTabWidth()
+  return 'tw=' . &tabstop
+endfunction
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+let g:lightline#bufferline#show_number = 2
+"let g:lightline#bufferline#composed_number_map = {
+"\ 1:  '⑴ ', 2:  '⑵ ', 3:  '⑶ ', 4:  '⑷ ', 5:  '⑸ ',
+"\ 6:  '⑹ ', 7:  '⑺ ', 8:  '⑻ ', 9:  '⑼ ', 10: '⑽ ',
+"\ 11: '⑾ ', 12: '⑿ ', 13: '⒀ ', 14: '⒁ ', 15: '⒂ ',
+"\ 16: '⒃ ', 17: '⒄ ', 18: '⒅ ', 19: '⒆ ', 20: '⒇ '}
+
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unicode_symbols = 1
+nmap <A-1> <Plug>lightline#bufferline#go(1)
+nmap <A-2> <Plug>lightline#bufferline#go(2)
+nmap <A-3> <Plug>lightline#bufferline#go(3)
+nmap <A-4> <Plug>lightline#bufferline#go(4)
+nmap <A-5> <Plug>lightline#bufferline#go(5)
+nmap <A-6> <Plug>lightline#bufferline#go(6)
+nmap <A-7> <Plug>lightline#bufferline#go(7)
+nmap <A-8> <Plug>lightline#bufferline#go(8)
+nmap <A-9> <Plug>lightline#bufferline#go(9)
+nmap <A-0> <Plug>lightline#bufferline#go(10)
+" .}}}
 colorscheme base16-solarized-dark
 
 " Leaderf. {{{
