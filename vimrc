@@ -365,7 +365,7 @@ let g:lightline.component        = {
       \ 'cwd': '%{fnamemodify(getcwd(), ":~")}',
       \ }
 let g:lightline.component_function = {
-      \   'gitbranch': 'fugitive#head',
+      \   'gitbranch': 'MyGitbranch',
       \   'tabwidth': 'MyTabWidth',
       \   'cocstatus': 'coc#status',
       \   'fileencoding': 'lightline#functions#fileencoding',
@@ -383,6 +383,22 @@ let g:lightline.component_function = {
 function! MyTabWidth()
   return 'tw=' . &tabstop
 endfunction
+
+function! MyGitbranch() abort
+  if exists('g:loaded_fugitive')
+    try
+      let l:head = fugitive#head()
+      if empty(l:head)
+        call fugitive#detect(getcwd())
+        let l:head = fugitive#head()
+      endif
+      return empty(l:head) ? '' : '  '.l:head 
+    catch
+    endtry
+  endif
+  return ''
+endfunction
+
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
 let g:lightline#bufferline#show_number = 2
