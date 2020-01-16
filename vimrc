@@ -298,10 +298,8 @@ if s:has_dein && dein#load_state(s:dein_base_path)
   call dein#add('haya14busa/dein-command.vim')
   call dein#add('wsdjeg/dein-ui.vim')
 
-  " ui
+  " general
   call dein#add('chriskempson/base16-vim', {'merged': 0})
-  " call dein#add('liuchengxu/eleline.vim')
-  " call dein#add('bagrat/vim-buffet', {'merged': 0})
   call dein#add('itchyny/lightline.vim')
   call dein#add('decayofmind/vim-lightline-functions', {'merged': 0})
   call dein#add('mengelbrecht/lightline-bufferline')
@@ -332,11 +330,6 @@ if s:has_dein && dein#load_state(s:dein_base_path)
     call dein#install()
   endif
 
-  let g:buffet_powerline_separators = 1
-  let g:buffet_tab_icon = "\uf00a"
-  let g:buffet_left_trunc_icon = "\uf0a8"
-  let g:buffet_right_trunc_icon = "\uf0a9" 
-  let g:eleline_powerline_fonts=1
 endif
 
 filetype plugin indent on       " Automatically detect file types.
@@ -351,7 +344,7 @@ let g:lightline.separator         = {'left': s:symbol_separator_left, 'right': s
 let g:lightline.subseparator      = {'left': s:symbol_subseparator_left, 'right': s:symbol_subseparator_right}
 let g:lightline.active            = {
       \ 'left': [['mode', 'paste'], ['readonly', 'cwd'], ['filename'], ['gitbranch', 'modified']],
-      \ 'right': [['percent', 'lineinfo'], ['whitespace', 'fileformat', 'fileencoding'], ['filetype']],
+      \ 'right': [['percent', 'lineinfo'], ['whitespace', 'fileformat', 'fileencoding'], ['filetype'], ['cocstatus']],
       \ }
 let g:lightline.inactive           = {'left': [['name']], 'right': [['percent', 'lineinfo']]}
 let g:lightline.tabline            = {'left': [['buffers']], 'right': [['tabwidth']]}

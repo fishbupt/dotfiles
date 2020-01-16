@@ -11,5 +11,6 @@
     ~/.dotfiles: ''
     ~/.gitconifg: gitconfig
     ~/_vimrc: vimrc
+    ~/vimfiles/coc-settings.json: coc-settings.json
       
             

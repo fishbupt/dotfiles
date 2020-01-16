@@ -1,0 +1,58 @@
+{
+    "languageserver": {
+        "cquery": {
+            "enable": false,
+            "command": "cquery",
+            "args": ["--log-file=/tmp/cq.log"],
+            "filetypes":["c", "cpp"],
+            "rootPatterns":[
+                "compile_flags.txt",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg"
+            ],
+            "initializationOptions": {
+                "cacheDirectory": "/tmp/cquery"
+            }
+        },
+        "ccls": {
+            "enable": true,
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
+        "clangd": {
+            "enable": false,
+            "command": "clangd",
+            "args": ["-background-index"],
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ]
+        },
+        "cmake":{
+            "enable": true,
+            "command": "cmake-language-server",
+            "filetypes": ["cmake"],
+            "rootPatterns": ["*build*/"],
+            "initializationOptions": {
+                "buildDirectory": "*build*"
+            }
+        }
+    }
+}
