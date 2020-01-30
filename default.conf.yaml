@@ -9,8 +9,17 @@
 # create the symbolic links for following files
 - link:
     ~/.dotfiles: ''
-    ~/.gitconifg: gitconfig
-    ~/_vimrc: vimrc
-    ~/vimfiles/coc-settings.json: coc-settings.json
-      
-            
+    ~/.gitconifg:
+      force: true
+      path: gitconfig
+    ~/_vimrc:
+      force: true
+      path: vim/vimrc
+    ~/vimfiles/coc-settings.json:
+      create: true
+      force: true
+      path: coc-settings.json
+
+#- shell:
+#  - [git submodule update --init --recursive, Installing submodules]
+

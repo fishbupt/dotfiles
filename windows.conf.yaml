@@ -1,2 +1,13 @@
 - link:
-    ~/AppData/Local/nvim/init.vim: vimrc
+    ~\AppData\Local\nvim\init.vim:
+      create: true
+      force: true
+      path: vim/vimrc
+    ~\AppData\Local\nvim\ginit.vim:
+      create: true
+      force: true
+      path: vim\ginit.vim
+    ~\AppData\Local\nvim\config:
+      create: true
+      force: true
+      path: vim\config

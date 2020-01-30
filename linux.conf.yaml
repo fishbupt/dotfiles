@@ -1,4 +1,11 @@
 - link:
-    ~/.zshrc: zshrc
-    ~/.config/nvim/init.vim: vimrc
-    ~/.tmux.conf: tmux/tmux.conf
+    ~/.zshrc:
+      force: true
+      path: zshrc
+    ~/.config/nvim/init.vim:
+      create: true
+      force: true
+      path: vim/vimrc
+    ~/.tmux.conf:
+      force: true
+      path: tmux/tmux.conf

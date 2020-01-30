@@ -1,0 +1,104 @@
+" vim: set sw=2 ts=2 sts=2 et tw=120 foldmarker={,} foldlevel=10 foldmethod=marker:
+"
+" $01-plug.vim
+" Plug specific config
+" This config should be loaded firstly before any other config
+
+" Helper Func. {{{
+function! s:check_cmd(cmd) abort
+  if executable(a:cmd)
+    return 1
+  else
+    echom 'Need command: ' . a:cmd
+endfunction
+" }}}
+
+" minpac {{{
+let s:bundle_base_path = expand(g:plugin_bundle_dir)
+let s:minpac_path = s:bundle_base_path . 'pack/minpac/opt/minpac'
+let s:plugpac_path = s:bundle_base_path . 'autoload/plugpac.vim'
+let s:has_minpac = isdirectory(s:minpac_path)
+let s:has_plugpac = filereadable(s:plugpac_path)
+if !s:has_minpac
+  if s:check_cmd('git')
+    call system(join([
+        \ 'git',
+        \ 'clone',
+        \ 'https://github.com/k-takata/minpac.git',
+        \ s:minpac_path
+        \ ], ' '))
+  endif
+endif
+if !s:has_plugpac
+  if s:check_cmd('curl')
+    call system(join([
+        \ 'curl',
+        \ '-fLo',
+        \ s:plugpac_path,
+        \ '--create-dirs',
+        \ 'https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim'
+        \ ], ' '))
+  endif
+endif
+call plugpac#begin()
+
+" minpac
+Pack 'k-takata/minpac', {'type': 'opt'}
+
+" general
+Pack 'chriskempson/base16-vim'
+Pack 'itchyny/lightline.vim'
+" Pack 'decayofmind/vim-lightline-functions'
+Pack 'mengelbrecht/lightline-bufferline'
+Pack 'tpope/vim-fugitive'
+Pack 'ryanoasis/vim-devicons'
+Pack 'Yggdroot/indentLine'
+Pack 'bronson/vim-trailing-whitespace'
+nmap <leader><space> :FixWhitespace<cr>
+let g:extra_whitespace_ignored_filetypes = ['defx']
+
+if has('nvim')
+  Pack 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
+else
+  Pack 'Shougo/defx.nvim'
+  Pack 'roxma/nvim-yarp'
+  Pack 'roxma/vim-hug-neovim-rpc'
+endif
+Pack 'kristijanhusak/defx-git'
+Pack 'kristijanhusak/defx-icons'
+
+" language
+Pack 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+Pack 'pboettch/vim-cmake-syntax', {'for': 'cmake'}
+Pack 'PProvost/vim-ps1', {'for': 'ps'}
+Pack 'tpope/vim-scriptease', {'for': 'vim'}
+Pack 'neoclide/coc-neco', {'for': 'vim'}
+
+Pack 'neoclide/coc.nvim', {'do': {->system('yarn install --frozen-lockfile')}}
+
+if WIN()
+  Pack 'Yggdroot/LeaderF', { 'do': {->system('./install.bat')}}
+else
+  Pack 'Yggdroot/LeaderF', { 'do': {->system('./install.sh')}}
+endif
+
+call plugpac#end()
+
+filetype plugin indent on       " Automatically detect file types.
+syntax enable                   " Syntax highlighting
+" }}}
+
+colorscheme base16-solarized-dark
+
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" {{{ cpp highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+let c_no_curly_error = 1
+" }}}
+"
