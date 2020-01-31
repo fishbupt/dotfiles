@@ -55,7 +55,7 @@ Pack 'ryanoasis/vim-devicons'
 Pack 'Yggdroot/indentLine'
 Pack 'bronson/vim-trailing-whitespace'
 nmap <leader><space> :FixWhitespace<cr>
-let g:extra_whitespace_ignored_filetypes = ['defx']
+let g:extra_whitespace_ignored_filetypes = ['defx', 'mkd']
 
 if has('nvim')
   Pack 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
@@ -74,13 +74,14 @@ Pack 'PProvost/vim-ps1', {'for': 'ps'}
 Pack 'tpope/vim-scriptease', {'for': 'vim'}
 Pack 'neoclide/coc-neco', {'for': 'vim'}
 
-Pack 'neoclide/coc.nvim', {'do': {->system('yarn install --frozen-lockfile')}}
+Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
 
 if WIN()
-  Pack 'Yggdroot/LeaderF', { 'do': {->system('./install.bat')}}
+  Pack 'Yggdroot/LeaderF', { 'do': {-> system('install.bat')}}
 else
-  Pack 'Yggdroot/LeaderF', { 'do': {->system('./install.sh')}}
+  Pack 'Yggdroot/LeaderF', { 'do': {-> system('install.sh')}}
 endif
+
 
 call plugpac#end()
 

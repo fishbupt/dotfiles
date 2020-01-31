@@ -54,6 +54,28 @@ function! LightlinePercent() abort
   return p . ' ' . l . '%'
 endfunction
 
+function! LightlineTabWidth() abort
+  return 'tw=' . &tabstop
+endfunction
+
+function! LightlineGitbranch() abort
+  if s:is_hidden()
+    return ''
+  endif
+  if exists('g:loaded_fugitive')
+    try
+      let l:head = fugitive#head()
+      if empty(l:head)
+        call fugitive#detect(getcwd())
+        let l:head = fugitive#head()
+      endif
+      return empty(l:head) ? '' : '  '.l:head
+    catch
+    endtry
+  endif
+  return ''
+endfunction
+
 " https://github.com/josa42/vim-lightline-sensible/blob/master/autoload/lightline/sensible.vim
 function! LightlineFileencoding()
   return s:is_hidden() ? '': (&fenc !=# '' ? &fenc : &enc)
@@ -192,24 +214,6 @@ let g:lightline.component_function = {
       \   'readonly': 'LightlineReadonly',
       \ }
 
-function! MyTabWidth()
-  return 'tw=' . &tabstop
-endfunction
-
-function! MyGitbranch() abort
-  if exists('g:loaded_fugitive')
-    try
-      let l:head = fugitive#head()
-      if empty(l:head)
-        call fugitive#detect(getcwd())
-        let l:head = fugitive#head()
-      endif
-      return empty(l:head) ? '' : '  '.l:head
-    catch
-    endtry
-  endif
-  return ''
-endfunction
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
