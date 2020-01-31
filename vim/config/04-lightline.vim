@@ -198,8 +198,8 @@ let g:lightline.component_expand   = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type     = {'buffers': 'tabsel'}
 let g:lightline.component_function = {
       \   'cwd': 'LightlineCwd',
-      \   'gitbranch': 'MyGitbranch',
-      \   'tabwidth': 'MyTabWidth',
+      \   'gitbranch': 'LightlineGitbranch',
+      \   'tabwidth': 'LightlineTabWidth',
       \   'cocstatus': 'coc#status',
       \   'fileencoding': 'LightlineFileencoding',
       \   'fileformat': 'LightlineFileformat_devicons',

@@ -48,7 +48,7 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 " general
 Pack 'chriskempson/base16-vim'
 Pack 'itchyny/lightline.vim'
-" Pack 'decayofmind/vim-lightline-functions'
+Pack 'mhinz/vim-startify'
 Pack 'mengelbrecht/lightline-bufferline'
 Pack 'tpope/vim-fugitive'
 Pack 'ryanoasis/vim-devicons'
@@ -57,6 +57,7 @@ Pack 'bronson/vim-trailing-whitespace'
 nmap <leader><space> :FixWhitespace<cr>
 let g:extra_whitespace_ignored_filetypes = ['defx', 'mkd']
 
+" File explorer
 if has('nvim')
   Pack 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 else

@@ -4,7 +4,7 @@
 "=============================================================================
 
 nnoremap <silent> - :call <SID>defx_open()<CR>
-nnoremap <silent><Leader>h :call <sid>defx_open({ 'find_current_file': v:true })<CR>
+nnoremap <silent><Leader>hh :call <sid>defx_open({ 'find_current_file': v:true })<CR>
 
 if !exists('g:rootmarkers')
   let g:rootmarkers = ['.git', 'build']
@@ -60,7 +60,8 @@ function! s:defx_open(...) abort
     call execute(printf('Defx -search=%s %s', expand('%:p'), l:path))
   else
     call execute(printf('Defx %s', l:path))
-    call execute('wincmd p')
+    " switch to orignal window
+    " call execute('wincmd p')
   endif
 
   return execute("norm!\<C-w>=")
@@ -100,7 +101,6 @@ augroup defx_init
   autocmd FileType defx match ExtraWhitespace /^^/
   " Keymap in defx
   autocmd FileType defx call s:defx_my_settings()
-
 augroup END
 
 function! s:defx_my_settings() abort
@@ -134,6 +134,10 @@ function! s:defx_my_settings() abort
         \ defx#do_action('copy')
   nnoremap <silent><buffer><expr> P
         \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> n
+        \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> M
         \ defx#do_action('rename')
   nnoremap <silent><buffer><expr> D
@@ -148,6 +152,8 @@ function! s:defx_my_settings() abort
         \ defx#do_action('toggle_select')
   nnoremap <silent><buffer><expr> R
         \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
 
   " Use > increase defx window size
 	nnoremap <silent><buffer><expr> >
