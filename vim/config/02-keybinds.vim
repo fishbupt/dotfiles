@@ -63,6 +63,8 @@ nmap <leader>8 <Plug>lightline#bufferline#go(8)
 nmap <leader>9 <Plug>lightline#bufferline#go(9)
 nmap <leader>0 <Plug>lightline#bufferline#go(10)
 
+" Tarbar
+nnoremap <silent> <F3> :TagbarToggle<CR>
 
 " Useful commands
 command! CleanPlugins call map(dein#check_clean(), "delete(v:val, 'rf')")

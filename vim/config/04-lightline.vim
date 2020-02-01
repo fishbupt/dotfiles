@@ -22,8 +22,8 @@ let s:percentChars = get(g:, 'lightline#sensible#percent_chars', [
 " https://github.com/josa42/vim-lightline-sensible/blob/master/autoload/lightline/sensible.vim
 function! s:is_hidden()
   let buftypes = ['terminal']
-  let filetypes = ['defx', 'nerdtree', 'startify', 'list', 'help', 'fugitive', 'fugitiveblame', 'qf', 'git', 'vim-plug']
-  let filenames = ['[Plugins]', '__vista__', 'startify', 'NERDTree', 'Tagbar', 'Gundo']
+  let filetypes = ['defx', 'tagbar', 'startify', 'list', 'help', 'fugitive', 'fugitiveblame', 'qf', 'git', 'vim-plug']
+  let filenames = ['[Plugins]', '__vista__', 'startify', 'NERDTree', '__Tagbar__.1', 'Gundo']
   return  s:is_terminal() || index(filetypes, &filetype) != -1 || index(filenames, expand('%:t')) != -1
 endfunction
 
@@ -134,7 +134,7 @@ endfunction
 
 function! LightlineLineinfo() abort
     return &filetype ==? 'help'             ? ''  :
-    \      &filetype ==? 'nerdtree'         ? ' ' :
+    \      &filetype ==? 'tagbar'           ? ' ' :
     \      &filetype ==? 'defx'             ? ' ' :
     \      &filetype ==? 'vim-plug'         ? ' ' :
     \      &filetype ==? 'vista_kind'       ? ' ' :
@@ -150,12 +150,13 @@ endfunction
 
 function! LightlineMode()
   let fname = expand('%:t')
-  return fname =~# '^__Tagbar__' ? 'Tagbar' :
+  return fname =~# '__Tagbar__.1' ? 'Tagbar' :
         \ fname ==# 'ControlP' ? 'CtrlP' :
         \ fname ==# '__Gundo__' ? 'Gundo' :
         \ fname ==# '__Gundo_Preview__' ? 'Gundo Preview' :
         \ fname =~# 'NERD_tree' ? 'NERDTree' :
         \ &ft ==# 'defx' ? 'Defx' :
+        \ &ft ==# 'tarbar' ? 'Tarbar' :
         \ &ft ==# 'unite' ? 'Unite' :
         \ &ft ==# 'vimfiler' ? 'VimFiler' :
         \ &ft ==# 'vimshell' ? 'VimShell' :

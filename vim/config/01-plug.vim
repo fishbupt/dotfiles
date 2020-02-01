@@ -54,9 +54,6 @@ Pack 'tpope/vim-fugitive'
 Pack 'ryanoasis/vim-devicons'
 Pack 'Yggdroot/indentLine'
 Pack 'bronson/vim-trailing-whitespace'
-nmap <leader><space> :FixWhitespace<cr>
-let g:extra_whitespace_ignored_filetypes = ['defx', 'mkd']
-
 " File explorer
 if has('nvim')
   Pack 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
@@ -67,6 +64,7 @@ else
 endif
 Pack 'kristijanhusak/defx-git'
 Pack 'kristijanhusak/defx-icons'
+Pack 'majutsushi/tagbar'
 
 " language
 Pack 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
@@ -92,8 +90,25 @@ syntax enable                   " Syntax highlighting
 
 colorscheme base16-solarized-dark
 
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" Tarbar setup
+let g:tagbar_width = 30
+let g:tagbar_iconchars = ['▶', '▼']
+augroup tagbar_init
+  autocmd!
+  " Keymap in defx
+  autocmd FileType tagbar call s:my_tarbar_settings()
+augroup END
+function! s:my_tarbar_settings() abort
+  " Use > increase defx window size
+  nnoremap <silent><buffer> > :vertical resize -10<cr>
+  " Use < decrease def window size
+  nnoremap <silent><buffer> < :vertical resize +10<cr>
+endfunction
 
+nmap <leader><space> :FixWhitespace<cr>
+let g:extra_whitespace_ignored_filetypes = ['defx', 'mkd']
+
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " {{{ cpp highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1

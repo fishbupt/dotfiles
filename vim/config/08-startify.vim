@@ -2,10 +2,11 @@ let g:startify_session_autoload = 1
 let g:startify_session_persistence = 1
 let g:startify_session_dir = '~/.vim/session'
 " TODO: delete Defx buffer
-" let g:startify_session_before_save = [
-"       \ 'echo "Cleaning up before saving.."',
-"       \ 'DefxClose',
-"       \ ]
+let g:startify_session_before_save = [
+      \ 'echo "Cleaning up before saving.."',
+      \ 'TagbarClose',
+      \ 'DefxClose',
+      \ ]
 
 let g:startify_custom_header = [
       \ '$$\    $$\ $$$$$$\ $$\      $$\         $$$$$$$\   $$$$$$\  $$\      $$\ $$$$$$$$\ $$$$$$$\  ',
