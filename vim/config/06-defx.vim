@@ -10,36 +10,6 @@ if !exists('g:rootmarkers')
   let g:rootmarkers = ['.git', 'build']
 endif
 
-" s:get_project_root(): get the project root (if any)
-function! s:get_project_root() abort
-  let l:path = expand('%:p:h')
-  if exists('b:projectroot')
-    if stridx(l:path, fnamemodify(b:projectroot, ':p'))==0
-      return b:projectroot
-    endif
-  endif
-  if l:path =~ '^fugitive:/'
-    if exists('b:git_dir')
-      return fnamemodify(b:git_dir, ':h')
-    endif
-    return '' " skip any fugitive buffers early
-  endif
-  for marker in g:rootmarkers
-    let pivot=l:path
-    while 1
-      let prev=pivot
-      let pivot=fnamemodify(pivot, ':h')
-      let fn = pivot.(pivot == '/' ? '' : '/').marker
-      if filereadable(fn) || isdirectory(fn)
-        return pivot
-      endif
-      if pivot==prev
-        break
-      endif
-    endwhile
-  endfor
-  return ''
-endfunction
 
 function! s:defx_open(...) abort
   let l:opts = get(a:, 1, {})
@@ -187,3 +157,35 @@ hi def link Defx_git_Ignored Comment
 " Requires nerd-font, install at https://github.com/ryanoasis/nerd-fonts or
 " disbale syntax highlighting to prevent performence issue
 let g:defx_icons_enable_syntax_highlight = 0
+
+" Helper functions
+" s:get_project_root(): get the project root (if any)
+function! s:get_project_root() abort
+  let l:path = expand('%:p:h')
+  if exists('b:projectroot')
+    if stridx(l:path, fnamemodify(b:projectroot, ':p'))==0
+      return b:projectroot
+    endif
+  endif
+  if l:path =~ '^fugitive:/'
+    if exists('b:git_dir')
+      return fnamemodify(b:git_dir, ':h')
+    endif
+    return '' " skip any fugitive buffers early
+  endif
+  for marker in g:rootmarkers
+    let pivot=l:path
+    while 1
+      let prev=pivot
+      let pivot=fnamemodify(pivot, ':h')
+      let fn = pivot.(pivot == '/' ? '' : '/').marker
+      if filereadable(fn) || isdirectory(fn)
+        return pivot
+      endif
+      if pivot==prev
+        break
+      endif
+    endwhile
+  endfor
+  return ''
+endfunction

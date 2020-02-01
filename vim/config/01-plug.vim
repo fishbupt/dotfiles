@@ -64,7 +64,7 @@ else
 endif
 Pack 'kristijanhusak/defx-git'
 Pack 'kristijanhusak/defx-icons'
-Pack 'majutsushi/tagbar'
+Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
 " language
 Pack 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
