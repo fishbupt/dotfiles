@@ -76,7 +76,8 @@ Pack 'neoclide/coc-neco', {'for': 'vim'}
 Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
 
 if WIN()
-  Pack 'Yggdroot/LeaderF', { 'do': {-> system('install.bat')}}
+  "TODO: nvim on window has bug, need to pass args
+  Pack 'Yggdroot/LeaderF', { 'do': {hook, name -> system('install.bat')}}
 else
   Pack 'Yggdroot/LeaderF', { 'do': {-> system('install.sh')}}
 endif

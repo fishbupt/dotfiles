@@ -67,8 +67,10 @@ set cursorline       " highlight current line
 set display=lastline
 set laststatus=2     " display statusline
 set noshowmode       " don't display mode at statusline
-set lines=1000       " make vim take fullscreen by setting lines&columns
-set columns=1000
+if has('gui_running')
+  set lines=100       " make vim take fullscreen by setting lines&columns
+  set columns=500
+endif
 "set list
 "set listchars=tab:>\ ,trail:\ ,extends:<,precedes:<
 set noarabicshape
