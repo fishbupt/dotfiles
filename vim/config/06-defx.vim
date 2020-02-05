@@ -3,6 +3,16 @@
 " Author: fishbupt <fishbupt@gmail.com>
 "=============================================================================
 
+if has('nvim')
+  Pack 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
+else
+  Pack 'Shougo/defx.nvim'
+  Pack 'roxma/nvim-yarp'
+  Pack 'roxma/vim-hug-neovim-rpc'
+endif
+Pack 'kristijanhusak/defx-git'
+Pack 'kristijanhusak/defx-icons'
+
 nnoremap <silent> - :call <SID>defx_open()<CR>
 nnoremap <silent><Leader>hh :call <sid>defx_open({ 'find_current_file': v:true })<CR>
 

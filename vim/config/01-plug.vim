@@ -47,23 +47,13 @@ Pack 'k-takata/minpac', {'type': 'opt'}
 
 " general
 Pack 'chriskempson/base16-vim'
-Pack 'itchyny/lightline.vim'
-Pack 'mhinz/vim-startify'
-Pack 'mengelbrecht/lightline-bufferline'
 Pack 'tpope/vim-fugitive'
 Pack 'ryanoasis/vim-devicons'
 Pack 'Yggdroot/indentLine'
 Pack 'bronson/vim-trailing-whitespace'
-" File explorer
-if has('nvim')
-  Pack 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
-else
-  Pack 'Shougo/defx.nvim'
-  Pack 'roxma/nvim-yarp'
-  Pack 'roxma/vim-hug-neovim-rpc'
-endif
-Pack 'kristijanhusak/defx-git'
-Pack 'kristijanhusak/defx-icons'
+Pack 'dstein64/vim-startuptime'
+Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
+
 Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
 " language
@@ -72,15 +62,6 @@ Pack 'pboettch/vim-cmake-syntax', {'for': 'cmake'}
 Pack 'PProvost/vim-ps1', {'for': 'ps'}
 Pack 'tpope/vim-scriptease', {'for': 'vim'}
 Pack 'neoclide/coc-neco', {'for': 'vim'}
-
-Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
-
-if WIN()
-  "TODO: nvim on window has bug, need to pass args
-  Pack 'Yggdroot/LeaderF', { 'do': {hook, name -> system('install.bat')}}
-else
-  Pack 'Yggdroot/LeaderF', { 'do': {-> system('install.sh')}}
-endif
 
 
 call plugpac#end()
@@ -107,7 +88,7 @@ function! s:my_tarbar_settings() abort
 endfunction
 
 nmap <leader><space> :FixWhitespace<cr>
-let g:extra_whitespace_ignored_filetypes = ['defx', 'mkd']
+let g:extra_whitespace_ignored_filetypes = ['defx', 'markdown', 'mkd']
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " {{{ cpp highlight

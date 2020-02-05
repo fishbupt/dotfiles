@@ -2,6 +2,14 @@
 " leaderf.vim --- leaderf configuration
 " Author: fishbupt <fishbupt@gmail.com>
 "=============================================================================
+
+if WIN()
+  "TODO: nvim on window has bug, need to pass args
+  Pack 'Yggdroot/LeaderF', { 'do': {hook, name -> system('install.bat')}}
+else
+  Pack 'Yggdroot/LeaderF', { 'do': {-> system('install.sh')}}
+endif
+
 " don't show the help in normal mode
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 1

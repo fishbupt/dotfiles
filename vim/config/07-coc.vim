@@ -3,6 +3,28 @@
 " Author: fishbupt <fishbupt@gmail.com>
 "============================================================================
 
+" Delay 1 sec to start coc server after (n)vim started
+let g:coc_start_at_startup = 0
+function! CocDelayStart(timer)
+  execute 'CocStart'
+endfunction
+call timer_start(1000, 'CocDelayStart', {'repeat': 1})
+
+" Disable Coc when file size is huge
+const g:huge_file_size = 0.5 * 1048576
+augroup hugefile
+  autocmd!
+  autocmd BufReadPre *
+        \ let size = getfsize(expand('<afile>')) |
+        \ if (size > g:huge_file_size) || (size == -2) |
+        \   echohl WarningMsg | echomsg 'WARNING: altering options for this huge file!' | echohl None |
+        \   exec 'CocDisable' |
+        \ else |
+        \   exec 'CocEnable' |
+        \ endif |
+        \ unlet size
+augroup END
+
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>

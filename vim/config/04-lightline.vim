@@ -2,6 +2,10 @@
 " lightline.vim --- lightline configuration
 " Author: fishbupt <fishbupt@gmail.com>
 "=============================================================================
+
+Pack 'itchyny/lightline.vim'
+Pack 'mengelbrecht/lightline-bufferline'
+
 " lightline#functions. {{{
 function! s:is_terminal() abort
   return &buftype ==# 'terminal'

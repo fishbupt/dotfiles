@@ -29,7 +29,7 @@ augroup Filetype_js
 augroup END
 
 augroup Filetype_text
-  autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
+  " autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
   autocmd FileType yaml set sw=2 sts=2 et
   " Highlight jsonc comment
   autocmd FileType json syntax match Comment +\/\/.\+$+
