@@ -10,6 +10,7 @@ function! s:check_cmd(cmd) abort
     return 1
   else
     echom 'Need command: ' . a:cmd
+  endif
 endfunction
 " }}}
 
@@ -22,22 +23,22 @@ let s:has_plugpac = filereadable(s:plugpac_path)
 if !s:has_minpac
   if s:check_cmd('git')
     call system(join([
-        \ 'git',
-        \ 'clone',
-        \ 'https://github.com/k-takata/minpac.git',
-        \ s:minpac_path
-        \ ], ' '))
+          \ 'git',
+          \ 'clone',
+          \ 'https://github.com/k-takata/minpac.git',
+          \ s:minpac_path
+          \ ], ' '))
   endif
 endif
 if !s:has_plugpac
   if s:check_cmd('curl')
     call system(join([
-        \ 'curl',
-        \ '-fLo',
-        \ s:plugpac_path,
-        \ '--create-dirs',
-        \ 'https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim'
-        \ ], ' '))
+          \ 'curl',
+          \ '-fLo',
+          \ s:plugpac_path,
+          \ '--create-dirs',
+          \ 'https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim'
+          \ ], ' '))
   endif
 endif
 call plugpac#begin()
@@ -46,22 +47,26 @@ call plugpac#begin()
 Pack 'k-takata/minpac', {'type': 'opt'}
 
 " general
-Pack 'chriskempson/base16-vim'
+Pack 'morhetz/gruvbox'
 Pack 'tpope/vim-fugitive'
 Pack 'ryanoasis/vim-devicons'
 Pack 'Yggdroot/indentLine'
 Pack 'bronson/vim-trailing-whitespace'
 Pack 'dstein64/vim-startuptime'
+Pack 'jiangmiao/auto-pairs'
 Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
 
 Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+Pack 'sbdchd/neoformat'
 
 " language
-Pack 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+" Pack 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+Pack 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Pack 'pboettch/vim-cmake-syntax', {'for': 'cmake'}
 Pack 'PProvost/vim-ps1', {'for': 'ps'}
 Pack 'tpope/vim-scriptease', {'for': 'vim'}
 Pack 'neoclide/coc-neco', {'for': 'vim'}
+Pack 'Shougo/neco-vim', {'for': 'vim'}
 
 
 call plugpac#end()
@@ -70,7 +75,7 @@ filetype plugin indent on       " Automatically detect file types.
 syntax enable                   " Syntax highlighting
 " }}}
 
-colorscheme base16-solarized-dark
+colorscheme gruvbox
 
 " Tarbar setup
 let g:tagbar_width = 30
@@ -99,5 +104,21 @@ let g:cpp_posix_standard = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 let c_no_curly_error = 1
+" }}}
+
+" {{{ neoformat
+let g:neoformat_basic_format_align = 1
+let g:neoformat_basic_format_retab = 1
+let g:neoformat_basic_format_trim = 1
+let g:neoformat_c_clang_format = {
+      \ 'exe': 'clang-format',
+      \ 'args': ['--style=file'],
+      \ }
+let g:neoformat_enabled_python = ['autopep8']
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * undojoin | Neoformat
+" augroup END
+noremap <M-f> :Neoformat<CR>
 " }}}
 "

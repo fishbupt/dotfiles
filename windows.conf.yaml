@@ -11,3 +11,7 @@
       create: true
       force: true
       path: vim\config
+    ~\AppData\Local\nvim\coc-settings.json:
+      create: true
+      force: true
+      path: coc-settings.json

@@ -80,7 +80,7 @@ set number
 set scrolloff=3
 set showcmd
 set showmatch
-set signcolumn=no
+set signcolumn=auto    " Display sign only when there is one
 set synmaxcol=512
 
 " }}}

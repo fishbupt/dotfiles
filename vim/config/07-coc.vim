@@ -11,7 +11,7 @@ endfunction
 call timer_start(1000, 'CocDelayStart', {'repeat': 1})
 
 " Disable Coc when file size is huge
-const g:huge_file_size = 0.5 * 1048576
+let g:huge_file_size = 0.5 * 1048576
 augroup hugefile
   autocmd!
   autocmd BufReadPre *

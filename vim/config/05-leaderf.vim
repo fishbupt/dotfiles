@@ -15,6 +15,9 @@ let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 1
 let g:Lf_UseVersionControlTool = 1
 let g:Lf_IgnoreCurrentBufferName = 1
+let g:Lf_StlColorscheme = 'gruvbox_material'
+let g:Lf_PopupColorscheme = 'gruvbox_material'
+
 " popup mode
 let g:Lf_PreviewInPopup = 1
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}

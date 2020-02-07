@@ -5,11 +5,18 @@
 
 Pack 'itchyny/lightline.vim'
 Pack 'mengelbrecht/lightline-bufferline'
+Pack 'maximbaz/lightline-ale'
 
 " lightline#functions. {{{
 function! s:is_terminal() abort
   return &buftype ==# 'terminal'
 endfunction
+
+let g:lightline#ale#indicator_checking = ''
+let g:lightline#ale#indicator_infos = ''
+let g:lightline#ale#indicator_warnings = ''
+let g:lightline#ale#indicator_errors = ''
+let g:lightline#ale#indicator_ok = ''
 
 " Copy from lightline-sensible
 let s:percentChars = get(g:, 'lightline#sensible#percent_chars', [
@@ -182,6 +189,11 @@ function! LightlineReload()
   call lightline#colorscheme()
   call lightline#update()
 endfunction
+
+function! CocCurrentFunction()
+  return get(b:, 'coc_current_function', '')
+endfunction
+
 " }}}
 
 let g:lightline                   = {}
@@ -190,22 +202,42 @@ let g:lightline.separator         = {'left': g:symbol_separator_left, 'right': g
 let g:lightline.subseparator      = {'left': g:symbol_subseparator_left, 'right': g:symbol_subseparator_right}
 let g:lightline.active            = {
       \ 'left': [['mode', 'paste'], ['readonly', 'cwd'], ['gitbranch', 'modified']],
-      \ 'right': [['percent', 'lineinfo'], ['whitespace', 'fileformat', 'fileencoding'], ['filetype'], ['cocstatus']],
+      \ 'right': [
+      \            ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+      \            ['percent', 'lineinfo'],
+      \            ['whitespace', 'fileformat', 'fileencoding'],
+      \            ['filetype'], ['cocstatus', 'currentfunction']
+      \          ],
       \ }
-let g:lightline.inactive           = {'left': [['mode'], ['name']],
-            \ 'right': [['percent', 'lineinfo']]}
-let g:lightline.tabline            = {'left': [['buffers']], 'right': [['tabwidth']]}
-let g:lightline.mode_map           = {
+let g:lightline.inactive = {'left': [['mode'], ['name']],
+      \                     'right': [['percent', 'lineinfo']]}
+let g:lightline.tabline  = {'left': [['buffers']], 'right': [['tabwidth']]}
+let g:lightline.mode_map = {
       \ 'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'V', "\<C-v>": 'V',
       \ 'c': 'C', 's': 'S', 'S': 'S', "\<C-s>": 'S', 't': 'T',
       \ }
-let g:lightline.component_expand   = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type     = {'buffers': 'tabsel'}
+let g:lightline.component_expand   = {
+      \   'buffers': 'lightline#bufferline#buffers',
+      \    'linter_checking': 'lightline#ale#checking',
+      \    'linter_infos': 'lightline#ale#infos',
+      \    'linter_warnings': 'lightline#ale#warnings',
+      \    'linter_errors': 'lightline#ale#errors',
+      \    'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type     = {
+      \   'buffers': 'tabsel',
+      \   'linter_checking': 'right',
+      \   'linter_infos': 'right',
+      \   'linter_warnings': 'right',
+      \   'linter_errors': 'right',
+      \   'linter_ok': 'right',
+      \ }
 let g:lightline.component_function = {
       \   'cwd': 'LightlineCwd',
       \   'gitbranch': 'LightlineGitbranch',
       \   'tabwidth': 'LightlineTabWidth',
       \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
       \   'fileencoding': 'LightlineFileencoding',
       \   'fileformat': 'LightlineFileformat_devicons',
       \   'filename': 'LightlineFilename',

@@ -3,6 +3,8 @@
 " Author: fishbupt <fishbupt@gmail.com>
 "=============================================================================
 "
+Pack 'mhinz/vim-startify'
+
 let g:startify_session_autoload = 1
 let g:startify_session_persistence = 1
 let g:startify_session_dir = '~/.vim/session'
