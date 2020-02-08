@@ -65,8 +65,10 @@ Pack 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Pack 'pboettch/vim-cmake-syntax', {'for': 'cmake'}
 Pack 'PProvost/vim-ps1', {'for': 'ps'}
 Pack 'tpope/vim-scriptease', {'for': 'vim'}
-Pack 'neoclide/coc-neco', {'for': 'vim'}
-Pack 'Shougo/neco-vim', {'for': 'vim'}
+Pack 'numirias/semshi', {'do': 'UpdateRemotePlugins'}
+" Need to put those two plugins to start folder
+Pack 'neoclide/coc-neco'
+Pack 'Shougo/neco-vim'
 
 
 call plugpac#end()
@@ -114,7 +116,7 @@ let g:neoformat_c_clang_format = {
       \ 'exe': 'clang-format',
       \ 'args': ['--style=file'],
       \ }
-let g:neoformat_enabled_python = ['autopep8']
+let g:neoformat_enabled_python = ['yapf', 'autopep8']
 " augroup fmt
 "   autocmd!
 "   autocmd BufWritePre * undojoin | Neoformat

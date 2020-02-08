@@ -20,6 +20,8 @@ let g:ale_lint_on_save =  1
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
+
+let g:ale_python_auto_pipenv = 1
 let g:ale_python_flake8_options = '--ignore=F821,E501'
 let g:ale_python_pylint_options = '--disable=C0111,C0301,R0902,R0903,R0913,R0914,R0915,E1101,E1004'
 
@@ -29,10 +31,10 @@ let g:ale_linters = {
 let g:ale_fixers = {
       \   'python': ['autopep8'],
       \ }
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_delay = 750
 let g:ale_python_flake8_options = '--ignore=F821,E501'
-let g:ale_python_pylint_options = '--disable=C0111,C0301,R0902,R0903,R0913,R0914,R0915,E1101,E1004'
+let g:ale_python_pylint_options = '--extension-pkg-whitelist=PyQt5 --disable=C0111,C0301,R0902,R0903,R0913,R0914,R0915,E1101,E1004'
 
 if g:colors_name ==# 'gruvbox'
   highlight link ALEErrorSign GruvboxRedSign
@@ -44,3 +46,4 @@ endif
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <leader>fx <Plug>(ale_fix)
