@@ -10,6 +10,7 @@ augroup END
 
 
 augroup Filetype_python
+  autocmd!
   autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
   autocmd FileType python let b:delimitMate_nesting_quotes = ['"']
   " set colorcolumn
@@ -21,6 +22,14 @@ augroup Filetype_python
     endif
   endfunc
   autocmd FileType python nnoremap <leader>b :call ColorColumn()<cr>
+augroup END
+
+augroup Filetype_cmake
+  autocmd!
+  autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in runtime! indent/cmake.vim
+  autocmd BufRead,BufNewFile *.cmake,CMakeLists.txt,*.cmake.in setf cmake
+  autocmd BufRead,BufNewFile *.ctest,*.ctest.in setf cmake
+  autocmd FileType cmake RainbowToggleOff
 augroup END
 
 augroup Filetype_js

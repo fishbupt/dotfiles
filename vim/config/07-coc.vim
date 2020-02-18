@@ -10,6 +10,8 @@ function! CocDelayStart(timer)
 endfunction
 call timer_start(1000, 'CocDelayStart', {'repeat': 1})
 
+let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-omnisharp']
+
 " Disable Coc when file size is huge
 let g:huge_file_size = 0.5 * 1048576
 augroup hugefile

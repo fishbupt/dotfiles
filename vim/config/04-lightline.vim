@@ -4,6 +4,7 @@
 "=============================================================================
 
 Pack 'itchyny/lightline.vim'
+Pack 'itchyny/vim-gitbranch'
 Pack 'mengelbrecht/lightline-bufferline'
 Pack 'maximbaz/lightline-ale'
 
@@ -34,8 +35,7 @@ let s:percentChars = get(g:, 'lightline#sensible#percent_chars', [
 function! s:is_hidden()
   let buftypes = ['terminal']
   let filetypes = ['defx', 'tagbar', 'startify', 'list', 'help', 'fugitive', 'fugitiveblame', 'qf', 'git', 'vim-plug']
-  let filenames = ['[Plugins]', '__vista__', 'startify', 'NERDTree', '__Tagbar__.1', 'Gundo']
-  return  s:is_terminal() || index(filetypes, &filetype) != -1 || index(filenames, expand('%:t')) != -1
+  return  s:is_terminal() || index(filetypes, &filetype) != -1 
 endfunction
 
 function! LightlineCwd() abort
@@ -73,18 +73,8 @@ function! LightlineGitbranch() abort
   if s:is_hidden()
     return ''
   endif
-  if exists('g:loaded_fugitive')
-    try
-      let l:head = fugitive#head()
-      if empty(l:head)
-        call fugitive#detect(getcwd())
-        let l:head = fugitive#head()
-      endif
-      return empty(l:head) ? '' : '  '.l:head
-    catch
-    endtry
-  endif
-  return ''
+  let l:head = gitbranch#name()
+  return empty(l:head) ? '' : '  '.l:head
 endfunction
 
 " https://github.com/josa42/vim-lightline-sensible/blob/master/autoload/lightline/sensible.vim

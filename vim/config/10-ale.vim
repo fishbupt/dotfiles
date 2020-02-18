@@ -31,9 +31,9 @@ let g:ale_linters = {
 let g:ale_fixers = {
       \   'python': ['autopep8'],
       \ }
-let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_text_changed = 0
 let g:ale_lint_delay = 750
-let g:ale_python_flake8_options = '--ignore=F821,E501'
+let g:ale_python_flake8_options = '--ignore=F811,F821,E501'
 let g:ale_python_pylint_options = '--extension-pkg-whitelist=PyQt5 --disable=C0111,C0301,R0902,R0903,R0913,R0914,R0915,E1101,E1004'
 
 if g:colors_name ==# 'gruvbox'

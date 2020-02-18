@@ -6,11 +6,30 @@
 
 " Basic. {{{
 
-if &compatible
-  " `:set nocp` has many side effects. Therefore this sould be done
-  " only when 'compatible' is set.
-  set nocompatible
+if has('vim_starting')
+  " Changing encoding in Vim at runtime is undefined behavior
+  setglobal fileencoding=utf-8
+  set encoding=utf-8
+  set fileencodings=usc-bom,utf-8,gbk,utf-16le,cp1252,iso-8859,cp936
+  set fileformats=unix,mac,dos
+
+  if &compatible
+    " `:set nocp` has many side effects. Therefore this sould be done
+    " only when 'compatible' is set.
+    set nocompatible
+  endif
+
+  " python host
+  if !empty($PYTHON_HOST_PROG)
+    let g:python_host_prog  = $PYTHON_HOST_PROG
+  endif
+  if !empty($PYTHON3_HOST_PROG)
+    let g:python3_host_prog = $PYTHON3_HOST_PROG
+  endif
 endif
+
+" This command has to be called after `set encoding`
+scriptencoding utf-8
 
 function! WIN()
   return has('win32') || has('win64')
@@ -30,20 +49,6 @@ if !WIN()
 else
   set shell=cmd.exe
 endif
-
-" }}}
-
-" Encoding .{{{
-if has('vim_starting')
-  " Changing encoding in Vim at runtime is undefined behavior
-  setglobal fileencoding=utf-8
-  set encoding=utf-8
-  set fileencodings=usc-bom,utf-8,gbk,utf-16le,cp1252,iso-8859,cp936
-  set fileformats=unix,mac,dos
-endif
-
-" This command has to be called after `set encoding`
-scriptencoding utf-8
 
 " }}}
 
@@ -212,13 +217,6 @@ let g:tex_flavor = 'latex'
 " }}}
 " }}}
 
-" python host
-if !empty($PYTHON_HOST_PROG)
-  let g:python_host_prog  = $PYTHON_HOST_PROG
-endif
-if !empty($PYTHON3_HOST_PROG)
-  let g:python3_host_prog = $PYTHON3_HOST_PROG
-endif
 
 " {{{ Load configs
 let s:curdir = fnamemodify(resolve(expand('<sfile>:p')), ':h')

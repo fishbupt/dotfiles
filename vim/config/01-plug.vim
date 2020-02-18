@@ -51,13 +51,20 @@ Pack 'morhetz/gruvbox'
 Pack 'tpope/vim-fugitive'
 Pack 'ryanoasis/vim-devicons'
 Pack 'Yggdroot/indentLine'
-Pack 'bronson/vim-trailing-whitespace'
+Pack 'ntpeters/vim-better-whitespace'
 Pack 'dstein64/vim-startuptime'
 Pack 'jiangmiao/auto-pairs'
+Pack 'tpope/vim-surround'
+Pack 'tpope/vim-repeat'
+Pack 'tpope/vim-commentary'
+Pack 'svermeulen/vim-yoink'
 Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
 
 Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Pack 'sbdchd/neoformat'
+Pack 'luochen1990/rainbow'
+Pack 'Konfekt/FastFold'
+let g:rainbow_active = 1
 
 " language
 " Pack 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
@@ -65,7 +72,12 @@ Pack 'bfrg/vim-cpp-modern', {'for': 'cpp'}
 Pack 'pboettch/vim-cmake-syntax', {'for': 'cmake'}
 Pack 'PProvost/vim-ps1', {'for': 'ps'}
 Pack 'tpope/vim-scriptease', {'for': 'vim'}
-Pack 'numirias/semshi', {'do': 'UpdateRemotePlugins'}
+Pack 'vim-python/python-syntax'
+let g:python_highlight_all = 1
+Pack 'tmhedberg/SimpylFold', {'for': 'python'}
+let g:SimplylFold_docstring_preview = 1
+Pack 'vim-scripts/indentpython.vim', {'for': 'python'}
+
 " Need to put those two plugins to start folder
 Pack 'neoclide/coc-neco'
 Pack 'Shougo/neco-vim'
@@ -94,8 +106,9 @@ function! s:my_tarbar_settings() abort
   nnoremap <silent><buffer> < :vertical resize +10<cr>
 endfunction
 
-nmap <leader><space> :FixWhitespace<cr>
-let g:extra_whitespace_ignored_filetypes = ['defx', 'markdown', 'mkd']
+nmap <leader><space> :StripWhitespace<cr>
+let g:current_line_whitespace_disabled_soft = 1
+let g:better_whitespace_filetypes_blacklist = ['defx', 'markdown', 'mkd', 'diff', 'gitcommit', 'unite', 'qf', 'help']
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " {{{ cpp highlight
@@ -117,10 +130,33 @@ let g:neoformat_c_clang_format = {
       \ 'args': ['--style=file'],
       \ }
 let g:neoformat_enabled_python = ['yapf', 'autopep8']
-" augroup fmt
-"   autocmd!
-"   autocmd BufWritePre * undojoin | Neoformat
-" augroup END
+augroup fmt
+  autocmd!
+  " autocmd FileType python autocmd BufWritePre <buffer> undojoin | Neoformat
+  autocmd FileType javascript autocmd BufWritePre <buffer> undojoin | Neoformat
+  " autocmd BufWritePre * undojoin | Neoformat
+augroup END
 noremap <M-f> :Neoformat<CR>
+" }}}
+
+" {{{ yoink.
+nmap <c-n> <plug>(YoinkPostPasteSwapBack)
+nmap <c-p> <plug>(YoinkPostPasteSwapForward)
+
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+
+nmap [y <plug>(YoinkRotateBack)
+nmap ]y <plug>(YoinkRotateForward)
+
+nmap <c-=> <plug>(YoinkPostPasteToggleFormat)
+
+nmap y <plug>(YoinkYankPreserveCursorPosition)
+xmap y <plug>(YoinkYankPreserveCursorPosition)
+" }}}
+
+" {{{ FastFold
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 0
 " }}}
 "
