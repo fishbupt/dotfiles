@@ -194,7 +194,11 @@ if !has('nvim')
   let g:plugin_bundle_dir = '~/vimfiles/'
 else
   " neovim
-  let g:plugin_bundle_dir = '~/AppData/Local/nvim/'
+  if WIN()
+    let g:plugin_bundle_dir = '~/AppData/Local/nvim/'
+  else
+    let g:plugin_bundle_dir = '~/.config/nvim/'
+  endif
 endif
 let g:loaded_2html_plugin = 1
 let g:loaded_gzip = 1
