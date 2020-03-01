@@ -10,7 +10,12 @@ function! CocDelayStart(timer)
 endfunction
 call timer_start(1000, 'CocDelayStart', {'repeat': 1})
 
-let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-omnisharp']
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-python',
+      \ 'coc-omnisharp',
+      \ 'coc-ultisnips',
+      \ 'coc-yank']
 
 " Disable Coc when file size is huge
 let g:huge_file_size = 0.5 * 1048576
@@ -43,9 +48,13 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
+" User <leader> y to open yank list
+nnoremap <silent> <leader>y :<C-u>CocList -A --normal yank<cr> 
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
+                                           \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " Or use `complete_info` if your vim support it, like:
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 

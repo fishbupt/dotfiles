@@ -59,6 +59,8 @@ Pack 'tpope/vim-repeat'
 Pack 'tpope/vim-commentary'
 Pack 'svermeulen/vim-yoink'
 Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
+Pack 'SirVer/ultisnips'
+Pack 'honza/vim-snippets'
 
 Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Pack 'sbdchd/neoformat'
@@ -159,4 +161,8 @@ xmap y <plug>(YoinkYankPreserveCursorPosition)
 nmap zuz <Plug>(FastFoldUpdate)
 let g:fastfold_savehook = 0
 " }}}
-"
+
+" {{{ Ultisnips
+let g:UltiSnipsEditSplit = 'vertical'
+" }}}
+
