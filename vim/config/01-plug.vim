@@ -61,6 +61,10 @@ Pack 'svermeulen/vim-yoink'
 Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
 Pack 'SirVer/ultisnips'
 Pack 'honza/vim-snippets'
+" This plugin extends " and @ in normal mode and <CTRL-R> in insert mode
+" so you can see the contents of the register
+Pack 'junegunn/vim-peekaboo'
+
 
 Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Pack 'sbdchd/neoformat'
