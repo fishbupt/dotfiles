@@ -36,6 +36,12 @@ noremap L g_
 " noremap <Up> 5k
 " delete line in insert mode
 inoremap <c-d> <esc>ddi
+" Easier way to go to normal mode. Also, alternative to <ESC>.
+inoremap <C-l> <esc>
+noremap! <silent> <C-l> <esc>
+vnoremap <silent> <C-l> <esc>
+onoremap <silent> <C-l> <esc>
+cnoremap <silent> <C-l> <C-c>
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
