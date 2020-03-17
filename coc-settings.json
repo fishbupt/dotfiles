@@ -55,9 +55,14 @@
       }
     }
   },
+  "diagnostic.enableSign":  false,
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.infoSign": "",
 
   // python settings
   "python.jediEnabled": true,
   "python.linting.enabled": false,
   "python.analysis.diagnosticEnabled": false
+
 }

@@ -13,6 +13,7 @@ call timer_start(1000, 'CocDelayStart', {'repeat': 1})
 let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-python',
+      \ 'coc-rls',
       \ 'coc-omnisharp',
       \ 'coc-ultisnips',
       \ 'coc-yank']

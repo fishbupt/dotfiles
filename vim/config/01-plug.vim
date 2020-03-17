@@ -64,6 +64,8 @@ Pack 'honza/vim-snippets'
 " This plugin extends " and @ in normal mode and <CTRL-R> in insert mode
 " so you can see the contents of the register
 Pack 'junegunn/vim-peekaboo'
+Pack 'cespare/vim-toml'
+Pack 'rust-lang/rust.vim', {'for': 'rust'}
 
 
 Pack 'majutsushi/tagbar', {'on': 'TagbarToggle'}
