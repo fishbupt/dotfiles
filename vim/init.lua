@@ -1,0 +1,5 @@
+require("options")
+require("pack")
+require("plugins")
+require("keymaps")
+require("filetype")
