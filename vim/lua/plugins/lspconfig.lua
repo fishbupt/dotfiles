@@ -135,3 +135,5 @@ end
 
 setup_servers()
 
+-- uncomment following line if you want to debug lsp
+-- vim.lsp.set_log_level("debug")
