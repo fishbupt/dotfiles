@@ -1,6 +1,6 @@
 # Neovim Lua配置
 
-##目录
+## 目录
 * [插件](#plugins)
 * [目录结构](#directory-tree)
 * [配置文件](#files-and-settings)
