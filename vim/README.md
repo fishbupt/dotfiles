@@ -1,15 +1,15 @@
 # Neovim Lua配置
 
 ## 目录
-* [插件](#plugins)
-* [目录结构](#directory-tree)
-* [配置文件](#files-and-settings)
-* [安装](#installation)
-* [LSP配置](#lsp-configuration)
-* [配色方案](#set-color-scheme)
-* [外观配置](#appearance)
+* [插件](#插件)
+* [目录结构](#目录结构)
+* [配置文件](#配置文件)
+* [安装](#安装)
+* [LSP配置](#LSP配置)
+* [配色方案](#配色方案)
+* [外观配置](#外观配置)
 
-## Plugins
+## 插件
 
 [packer.nvim](https://github.com/wbthomason/packer.nvim) -  A use-package inspired plugin manager for Neovim
 
@@ -37,7 +37,7 @@
 
 [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - A Lua fork of vim-devicons
 
-## Directory Tree
+## 目录结构
 
 `${HOME}/.config/nvim`
 
@@ -62,7 +62,7 @@
 └── init.lua
 ```
 
-## Files and Settings
+## 配置文件
 
 `/nvim`
 
@@ -102,7 +102,7 @@ See: https://github.com/nanotee/nvim-lua-guide#where-to-put-lua-files
 
 * [nvim-treesitter](nvim/lua/plugins/nvim-treesitter): Treesitter interface configuration
 
-## Installation
+## 安装
 
 1. Install [Neovim v0.7.x](https://github.com/neovim/neovim/releases/latest).
 
@@ -137,7 +137,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 nvim +PackerSync
 ```
 
-## LSP Configuration
+## LSP配置
 
 1. Install LSP language servers with `npm`
 
@@ -175,7 +175,7 @@ JavaScript, TypeScript - [tsserver](https://github.com/neovim/nvim-lspconfig/blo
 
 See: [nvim-lspconfig #doc/server_configurations.md](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
 
-## Set Color Scheme
+## 配色方案
 
 The color scheme is defined in the following files (default: OneDark):
 
@@ -199,7 +199,7 @@ local colors = require('core/colors').onedark_dark
 
 See: [Appearance](#appearance)
 
-## Appearance
+## 外观配置
 
 ### Colorschemes
 
