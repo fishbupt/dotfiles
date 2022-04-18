@@ -9,26 +9,6 @@
 * [配色方案](#set-color-scheme)
 * [外观配置](#appearance)
 
-* Improve LSP configuration
-<p align="center">
-<img src="img/logo.png" alt="neovim-lua_logo">
-</p>
-
-<h3 align="center">
-Neovim KISS configuration with Lua
-</h3>
-
-## Table of Contents
-
-* [Plugins](#plugins)
-* [Directory Tree](#directory-tree)
-* [Files and Settings](#files-and-settings)
-* [Installation](#installation)
-* [LSP Configuration](#lsp-configuration)
-* [Set Color Scheme](#set-color-scheme)
-* [Configuration Check](#configuration-check)
-* [Appearance](#appearance)
-
 ## Plugins
 
 [packer.nvim](https://github.com/wbthomason/packer.nvim) -  A use-package inspired plugin manager for Neovim
