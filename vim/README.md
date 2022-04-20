@@ -65,8 +65,31 @@
 ## 快捷键
 <details>
  <summary markdown="span">LSP相关</summary>
+ 
+ | 快捷键       | 描述        |
+ | ----------- | ----------- |
+ | gD          | go to declaration       |
+ | gd          | go to definition        |
+ | K           | hover                   |
+ | gi          | list implementation     |
+ | gr          | list reference          |
+ | \<space\> f | formatting              |
 </details>
 
+<details>
+ <summary markdown="span">代码补全相关</summary>
+ 
+ | 快捷键       | 描述        |
+ | ----------- | ----------- |
+ | \<C-p\>       | pre item    |
+ | \<C-n\>       | next item   |
+ | \<C-d\>       | scroll down |
+ | \<C-f\>       | scroll up   |
+ | \<C-Space\>   | complete    |
+ | \<C-e\>       | close       |
+ | \<CR\>        | confirm     |
+ 
+</details>
 ## 配置文件
 
 `/nvim`
