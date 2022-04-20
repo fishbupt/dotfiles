@@ -4,6 +4,7 @@
 * [插件](#插件)
 * [目录结构](#目录结构)
 * [配置文件](#配置文件)
+* [快捷键](#快捷键)
 * [安装](#安装)
 * [LSP配置](#LSP配置)
 * [配色方案](#配色方案)
@@ -61,6 +62,10 @@
 │   └── packer_compiled.lua
 └── init.lua
 ```
+## 快捷键
+<details>
+ <summary markdown="span">LSP相关</summary>
+</details>
 
 ## 配置文件
 
