@@ -28,6 +28,7 @@
   
 <details>
   <summary markdown="span">文件浏览</summary>
+ 
   |快捷键     | 描述       |
   |----------| -----------|
   | -        | 触发NvimTree的打开或关闭 |
