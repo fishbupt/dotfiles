@@ -1,0 +1,55 @@
+-----------------------------------------------------------------------------"
+-- Commands \ Modes | Normal | Insert | Command | Visual | Select | Operator |
+--------------------|--------|--------|---------|--------|--------|----------|
+-- map  / noremap   |    @   |   -    |    -    |   @    |   @    |    @     |
+-- nmap / nnoremap  |    @   |   -    |    -    |   -    |   -    |    -     |
+-- vmap / vnoremap  |    -   |   -    |    -    |   @    |   @    |    -     |
+-- omap / onoremap  |    -   |   -    |    -    |   -    |   -    |    @     |
+-- xmap / xnoremap  |    -   |   -    |    -    |   @    |   -    |    -     |
+-- smap / snoremap  |    -   |   -    |    -    |   -    |   @    |    -     |
+-- map! / noremap!  |    -   |   @    |    @    |   -    |   -    |    -     |
+-- imap / inoremap  |    -   |   @    |    -    |   -    |   -    |    -     |
+-- cmap / cnoremap  |    -   |   -    |    @    |   -    |   -    |    -     |
+-----------------------------------------------------------------------------"
+local vimp = require("vimp")
+-- Set <leader> and <localleader>
+vim.g.mapleader = [[,]]
+vim.g.maplocalleader = [[\]]
+
+-- my cmds
+vim.cmd([[command! BufOnly silent! execute "%bd|e#|bd#"]])
+vim.cmd([[command! Cwd execute "lcd %:p:h"]])
+
+vimp.nnoremap("<leader>ev", "edit $MYVIMRC")
+vimp.nnoremap("<leader>sv", "source %")
+
+-- buffer ops
+vimp.nnoremap("<leader>.", ":bprevious<cr>")
+vimp.nnoremap("<leader>,", ":bnext<cr>")
+vimp.nnoremap("<C-x>k", "bdelete<cr>")
+vimp.nnoremap("<C-s>", "write<cr>")
+-- vimp.nnoremap("Y", "y$")
+
+-- fast move
+vimp.nnoremap("H", "^")
+vimp.nnoremap("L", "g_")
+vimp.inoremap("<C-d", "<esc>ddi")
+vimp.nnoremap("<leader>/", ":noh<cr><cr>")
+
+--- yoink.
+--vimp.nmap("<c-n>", "<plug>(YoinkPostPasteSwapBack)")
+--vimp.nmap("<c-p>", "<plug>(YoinkPostPasteSwapForward)")
+
+vimp.nmap("p", "<plug>(YoinkPaste_p)")
+vimp.nmap("P", "<plug>(YoinkPaste_P)")
+
+vimp.nmap("[y", "<plug>(YoinkRotateBack)")
+vimp.nmap("]y", "<plug>(YoinkRotateForward)")
+
+vimp.nmap("<c-=>", "<plug>(YoinkPostPasteToggleFormat)")
+
+vimp.nmap("y", "<plug>(YoinkYankPreserveCursorPosition)")
+vimp.xmap("y", "<plug>(YoinkYankPreserveCursorPosition)")
+
+--- symbols-outline
+vimp.nnoremap("<F3>", ":SymbolsOutline<cr>")
