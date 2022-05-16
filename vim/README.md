@@ -50,7 +50,7 @@
 │   │   ├── keymaps.lua
 │   │   ├── settings.lua
 │   │   └── statusline.lua
-│   ├── plugins
+│   |   |
 │   │   ├── alpha-nvim.lua
 │   │   ├── indent-blankline.lua
 │   │   ├── nvim-cmp.lua
@@ -58,9 +58,9 @@
 │   │   ├── nvim-tree.lua
 │   │   └── nvim-treesitter.lua
 │   └── packer_init.lua
-├── plugin
-│   └── packer_compiled.lua
+|   |
 └── init.lua
+|__ ginit.vim
 ```
 ## 快捷键
 <details>
