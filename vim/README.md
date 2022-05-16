@@ -44,23 +44,34 @@
 
 ```
 .
+├── ginit.vim
+├── init.lua
 ├── lua
-│   ├── core
-│   │   ├── colors.lua
-│   │   ├── keymaps.lua
-│   │   ├── settings.lua
-│   │   └── statusline.lua
-│   |   |
-│   │   ├── alpha-nvim.lua
-│   │   ├── indent-blankline.lua
-│   │   ├── nvim-cmp.lua
-│   │   ├── nvim-lspconfig.lua
-│   │   ├── nvim-tree.lua
-│   │   └── nvim-treesitter.lua
-│   └── packer_init.lua
-|   |
-└── init.lua
-|__ ginit.vim
+│   ├── filetype.lua
+│   ├── global.lua
+│   ├── keymaps.lua
+│   ├── options.lua
+│   ├── pack.lua
+│   ├── plugins
+│   │   ├── autopair.lua
+│   │   ├── blankline.lua
+│   │   ├── bufferline.lua
+│   │   ├── compe.lua
+│   │   ├── dashboard.lua
+│   │   ├── icons.lua
+│   │   ├── lspconfig.lua
+│   │   ├── lspkind.lua
+│   │   ├── lspsaga.lua
+│   │   ├── lualine.lua
+│   │   ├── neoformat.lua
+│   │   ├── nvim-cmp.lua
+│   │   ├── nvimtree.lua
+│   │   ├── qf_helper.lua
+│   │   ├── telescope.lua
+│   │   ├── theme.lua
+│   │   ├── treesitter.lua
+│   │   └── trouble.lua
+│   └── plugins.lua
 ```
 ## 快捷键
 <details>
