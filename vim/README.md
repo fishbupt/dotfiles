@@ -38,7 +38,7 @@
 
 [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - A Lua fork of vim-devicons
 
-[vim-surround](https://github.com/tpope/vim-surround) 添加vim本身缺失的motion（ds、cs、ys），用于处理成对的符号（引号、标签等）
+[vim-surround](https://github.com/tpope/vim-surround) 添加vim本身缺失的motion（ds、cs、ys），用于处理成对的符号（引号、标签等）  
 [vim-repeat](https://github.com/tpope/vim-repeat) 使得 surround插件提供的motion拥有.操作重复的功能
 ## 目录结构
 
