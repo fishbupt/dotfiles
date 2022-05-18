@@ -62,3 +62,14 @@
   |W         |折叠整课目录树|
   |S         |提示用户输入路径，然后展开树以匹配路径|
 </details>
+ <summary markdown="span">Surround</summary>
+ 
+  |快捷键     | 描述       |
+  |----------| -----------|
+  | cs       | change surrounding |
+  | ds       | delete surrounding |
+  | ys{motion/text-object} | you surrounding |
+  | yss      | you surrounding on the current line |
+ 
+<details>
+</details>
