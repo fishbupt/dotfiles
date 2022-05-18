@@ -12,7 +12,7 @@
 
 ## 插件
 
-[packer.nvim](https://github.com/wbthomason/packer.nvim) -  A use-package inspired plugin manager for Neovim
+[packer.nvim](https://github.com/wbthomason/packer.nvim) -  Neovim的包管理器
 
 [feline.nvim](https://github.com/Famiu/feline.nvim) - A minimal, stylish and customizable statusline for Neovim written in Lua
 
@@ -39,7 +39,10 @@
 [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - A Lua fork of vim-devicons
 
 [vim-surround](https://github.com/tpope/vim-surround) 添加vim本身缺失的motion（ds、cs、ys），用于处理成对的符号（引号、标签等）  
+
 [vim-repeat](https://github.com/tpope/vim-repeat) 使得 surround插件提供的motion拥有.操作重复的功能
+
+[trouble](https://github.com/folke/trouble.nvim) 用来辅助显示和定位LSP的问题，参考等
 ## 目录结构
 
 `${HOME}/.config/nvim`
