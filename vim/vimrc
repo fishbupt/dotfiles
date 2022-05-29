@@ -147,3 +147,53 @@ set statusline+=%3*\%{&ff}\[%{&fenc}]\ %*   "显示文件编码类型
 set statusline+=%4*\ row:%l/%L,col:%c\ %*   "显示光标所在行和列
 set statusline+=%5*\%3p%%\%*            "显示光标前文本所占总文本的比例
  }}}
+
+" Mappings .{{{
+"---------------------------------------------------------------------------"
+" Commands \ Modes | Normal | Insert | Command | Visual | Select | Operator |
+"------------------|--------|--------|---------|--------|--------|----------|
+" map  / noremap   |    @   |   -    |    -    |   @    |   @    |    @     |
+" nmap / nnoremap  |    @   |   -    |    -    |   -    |   -    |    -     |
+" vmap / vnoremap  |    -   |   -    |    -    |   @    |   @    |    -     |
+" omap / onoremap  |    -   |   -    |    -    |   -    |   -    |    @     |
+" xmap / xnoremap  |    -   |   -    |    -    |   @    |   -    |    -     |
+" smap / snoremap  |    -   |   -    |    -    |   -    |   @    |    -     |
+" map! / noremap!  |    -   |   @    |    @    |   -    |   -    |    -     |
+" imap / inoremap  |    -   |   @    |    -    |   -    |   -    |    -     |
+" cmap / cnoremap  |    -   |   -    |    @    |   -    |   -    |    -     |
+"---------------------------------------------------------------------------"
+
+let g:mapleader = ','
+let g:maplocalleader = '\'
+
+" 用来快速编辑vim配置文件
+noremap <leader>ev :edit $MYVIMRC<CR>
+noremap <leader>sv :source $MYVIMRC<CR>
+
+" 快捷操作
+nmap <leader>. :bprevious<CR>
+nmap <leader>, :bnext<CR>
+
+noremap <leader>/ :nohighlight<CR>
+
+noremap H ^
+noremap L g_
+noremap <Down> 5j
+noremap <Up> 5k
+inoremap <c-d> <ESC>ddi
+
+inoremap <C-l> <ESC>
+noremap! <silent> <C-l> <ESC>
+vnoremap <silent> <C-l> <ESC>
+onoremap <silent> <C-l> <ESC>
+cnoremap <silent> <C-l> <C-c>
+
+nnoremap Y y$
+
+" 快捷命令
+command! BufOnly silent! execute "%bd|e#|bd#"
+
+command! Cwd execute "lcd %:p:h"
+cmap cwd :Cwd
+cmap cd. :Cwd
+" }}}
