@@ -4,10 +4,10 @@
 " Note: for fast startup time on windows platform,
 " set PYTHON_HOST_PROG and PYTHON3_HOST_PROG environment variables
 
-" Basic. {{{
+" 基础配置 {{{
 
 if has('vim_starting')
-  " Changing encoding in Vim at runtime is undefined behavior
+  " 文件编码  
   setglobal fileencoding=utf-8
   set encoding=utf-8
   set fileencodings=usc-bom,utf-8,gbk,utf-16le,cp1252,iso-8859,cp936
@@ -19,13 +19,6 @@ if has('vim_starting')
     set nocompatible
   endif
 
-  " python host
-  if !empty($PYTHON_HOST_PROG)
-    let g:python_host_prog  = $PYTHON_HOST_PROG
-  endif
-  if !empty($PYTHON3_HOST_PROG)
-    let g:python3_host_prog = $PYTHON3_HOST_PROG
-  endif
 endif
 
 " This command has to be called after `set encoding`
@@ -52,7 +45,7 @@ endif
 
 " }}}
 
-" Indent. {{{
+" 缩进. {{{
 set autoindent          " Keep indentation
 set tabstop=4           " Set tab equal to 4 spaces
 set softtabstop=4       " Set soft tab equal to 4 spaces
@@ -64,14 +57,20 @@ set breakindent
 set smartindent
 " }}}
 
-" Appearance. {{{
+" 语法高亮. {{{
+syntax on
+filetype indent on
+" }}}
+
+" 外观显示. {{{
+colorscheme desert
 set ambiwidth=single " set to single if you really want to use powerline fonts
 set cmdheight=1
 set conceallevel=2
 set cursorline       " highlight current line
 set display=lastline
 set laststatus=2     " display statusline
-set noshowmode       " don't display mode at statusline
+set showmode       " 在状态栏显示vim模式
 if has('gui_running')
   if WIN()
     if exists(':simalt')
@@ -82,83 +81,31 @@ if has('gui_running')
     set columns=500
   endif
 endif
-"set list
-"set listchars=tab:>\ ,trail:\ ,extends:<,precedes:<
+set list
+set listchars=tab:>\ ,trail:\ ,extends:<,precedes:<
 set noarabicshape
 set nowrap
 set number
-" set relativenumber
 set scrolloff=3
 set showcmd
 set showmatch
 set signcolumn=auto    " Display sign only when there is one
 set synmaxcol=512
-
-" }}}
-
-" Symbols define {{{
-let s:powerline_font              = 1 " Enable for powerline glyphs
-if s:powerline_font
-  let g:symbol_separator_left     = "\uE0B0"
-  let g:symbol_separator_right    = "\uE0B2"
-  let g:symbol_subseparator_left  = "\uE0B1"
-  let g:symbol_subseparator_right = "\uE0B3"
-  let g:symbol_vcs_branch         = "\uE0A0"
-else
-  let g:symbol_separator_left     = "▏"
-  let g:symbol_separator_right    = "▕"
-  let g:symbol_subseparator_left  = "│"
-  let g:symbol_subseparator_right = "│"
-  let g:symbol_vcs_branch         = "\u16B4"
-endif
-" }}}
-
-" Terminal UX {{{
-set t_Co=256 " Terminal supports 256 colors
-set t_md=    " Disable bold fonts in terminal
-
-" Enable italics
-let &t_ZH = "\e[3m"
-let &t_ZR = "\e[23m"
-
-if has('termguicolors')
-  set termguicolors " Enable 24bit colors in terminal
-endif
+set textwidth=120
 " }}}
 
 " GUI. {{{
-set showtabline=2 "Show tabline, enable lightline#tabline extentsion
 if has('gui_running')
-  let g:no_buffers_menu=1
-  set guioptions+=M "Don't load menu.vim
-  set guioptions-=m "Hide menu bar.
-  set guioptions-=T "Hide toolbar.
-  set guioptions-=L "Hide left-hand scrollbar
-  set guioptions-=r "Hide right-hand scrollbar
-  set guioptions-=b "Hide bottom scrollbar
-  set guioptions-=e "Hide tab
-  set mousehide     "Hide the mouse cursor while typing
-  set visualbell
-  set t_vb=
-  " DON'T put quotes to font name
   set guifont=SauceCodePro_Nerd_Font_Mono:h11:cANSI:qDRAFT
 endif
 "}}}
 
-" Folder. {{{
-set foldenable
-"set foldcolumn=1
-"set foldmethod=indent
-"set foldtext=Mopp_fold_text()
-set foldmarker=\ {{{,\ }}}
-" }}}
-
-" Safety. {{{
-set backup
+" 备份. {{{
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
-set swapfile
-set writebackup
+set nobackup
+set noswapfile
+set nowritebackup
 " }}}
 
 " History {{{
@@ -193,47 +140,10 @@ set virtualedit=block
 set whichwrap=b,s,h,l,<,>,[,]
 set wildignorecase
 set wildmenu
-
-" Turn off default plugins. {{{
-if !has('nvim')
-  " vim8
-  let g:plugin_bundle_dir = '~/vimfiles/'
-else
-  " neovim
-  if WIN()
-    let g:plugin_bundle_dir = '~/AppData/Local/nvim/'
-  else
-    let g:plugin_bundle_dir = '~/.config/nvim/'
-  endif
-endif
-let g:loaded_2html_plugin = 1
-let g:loaded_gzip = 1
-let g:loaded_rrhelper = 1
-let g:loaded_tar = 1
-let g:loaded_tarPlugin = 1
-let g:loaded_vimballPlugin = 1
-let g:loaded_zip = 1
-let g:loaded_zipPlugin = 1
-let g:loaded_matchparen = 1
-" }}}
-
-" Configs for default scripts. {{{
-let g:lisp_rainbow = 1
-let g:lisp_instring = 1
-let g:lispsyntax_clisp = 1
-let g:c_syntax_for_h = 1
-let g:tex_conceal = ''
-let g:tex_flavor = 'latex'
-" }}}
-" }}}
-
-
-" {{{ Load configs
-let s:curdir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-
-for fpath in sort(split(globpath(expand(s:curdir . '/config'), '*.vim'), '\n'))
-  exe 'source' fpath
-endfor
-" }}}
-
-
+" 手动配置状态栏 {{{
+set statusline=%1*\%<%.50F\             "显示文件名和文件路径 (%<应该可以去掉)
+set statusline+=%=%2*\%y%m%r%h%w\ %*        "显示文件类型及文件状态
+set statusline+=%3*\%{&ff}\[%{&fenc}]\ %*   "显示文件编码类型
+set statusline+=%4*\ row:%l/%L,col:%c\ %*   "显示光标所在行和列
+set statusline+=%5*\%3p%%\%*            "显示光标前文本所占总文本的比例
+ }}}
